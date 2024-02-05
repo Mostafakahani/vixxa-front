@@ -5,32 +5,28 @@ import Products from "../../../Componenets/Shop/products";
 function ProductsPage() {
   const [items, setItems] = useState([
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlEN0pKGxIz2GoyHMm2ZfHGoEt5URdAQ0D7fL52uSi3A&s",
-      title: "Vixxa",
+      image: "https://fronthooks.ir/images/courses/coding-journey.svg",
+      title: "Tailwind css template for tail wind navigation",
       description:
         "Vixxa is a website that helps you to find the best vaccines for you.",
       downloads: 300,
     },
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlEN0pKGxIz2GoyHMm2ZfHGoEt5URdAQ0D7fL52uSi3A&s",
-      title: "Vixxa",
+      image: "https://fronthooks.ir/images/courses/tailwind.svg",
+      title: "Tailwind css template",
       description:
         "Vixxa is a website that helps you to find the best vaccines for you.",
       downloads: 300,
     },
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlEN0pKGxIz2GoyHMm2ZfHGoEt5URdAQ0D7fL52uSi3A&s",
-      title: "Vixxa",
+      image: "https://fronthooks.ir/images/courses/javascript.svg",
+      title: "tail wind",
       description:
         "Vixxa is a website that helps you to find the best vaccines for you.",
       downloads: 300,
     },
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlEN0pKGxIz2GoyHMm2ZfHGoEt5URdAQ0D7fL52uSi3A&s",
+      image: "https://fronthooks.ir/images/courses/flex-grid.svg",
       title: "Vixxa",
       description:
         "Vixxa is a website that helps you to find the best vaccines for you.",

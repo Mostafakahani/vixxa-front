@@ -39,7 +39,10 @@ function Header() {
   return (
     <Container sx={{ position: "sticky" }} maxWidth={false} disableGutters>
       <header>
-        <Grid container sx={{ boxShadow: 5, px: 2 }}>
+        <Grid
+          container
+          sx={{ boxShadow: "0px 9px 120px -15px #00000075", px: 2 }}
+        >
           {/* Mobile Menu Button */}
           <Grid item xs={6} sx={{ display: { md: "none", xs: "block" } }}>
             <IconButton size="large" onClick={handleDrawerOpen}>
@@ -59,15 +62,15 @@ function Header() {
             <Grid item md={2}>
               <Box component={"img"} src="/next.svg" width={100} />
             </Grid>
-            <Grid item md={2}>
-              <Button startIcon={<ComponentIcon />}>کامپوننت ها</Button>
-            </Grid>
-            <Grid item md={2}>
-              <Button startIcon={<TemplateIcon />}>تمپلیت ها</Button>
-            </Grid>
-            <Grid item md={2}>
-              <Button startIcon={<ContactIcon />}>ارتباط با ما</Button>
-            </Grid>
+            <Button color="inherit" startIcon={<ComponentIcon />}>
+              کامپوننت ها
+            </Button>
+            <Button color="inherit" startIcon={<TemplateIcon />}>
+              تمپلیت ها
+            </Button>
+            <Button color="inherit" startIcon={<ContactIcon />}>
+              ارتباط با ما
+            </Button>
           </Grid>
           <Grid
             item
@@ -86,7 +89,21 @@ function Header() {
               </IconButton>
             </Grid>
             <Grid item>
-              <Button startIcon={<UserIcon />}>ورود</Button>
+              <Button
+                color="inherit"
+                sx={{
+                  bgcolor: "#4A6DFF",
+                  borderRadius: 5,
+                  px: 2,
+                  color: "#FFFFFF",
+                  "&:hover": {
+                    color: "#4A6DFF",
+                  },
+                }}
+                startIcon={<UserIcon />}
+              >
+                ورود
+              </Button>
             </Grid>
           </Grid>
         </Grid>
@@ -95,18 +112,28 @@ function Header() {
       {/* Drawer for Mobile Menu */}
       <Drawer anchor="top" open={isDrawerOpen} onClose={handleDrawerClose}>
         <Box
-          sx={{ width: "100%", display: "flex", flexDirection: "column" }}
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            p: 2,
+          }}
           role="presentation"
           onClick={handleDrawerClose}
         >
+          <Box component={"img"} src="/next.svg" width={100} sx={{ py: 1 }} />
+
           {headerItems.map((item, index) => (
             <Button
+              fullWidth
               key={index}
               startIcon={item.icon}
               href={item.url}
               sx={{
                 textTransform: "none",
                 display: "flex",
+                py: 1,
               }}
             >
               {item.text}
