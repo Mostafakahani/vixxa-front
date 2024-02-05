@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import RTL from "./RTL";
 import Head from "next/head";
 import { CssBaseline } from "@mui/material";
+import Layout from "../../Componenets/Layout/Layout";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -20,10 +21,10 @@ export default function App(props) {
           <meta name="googlebot" content="index" />
           <title>Vixxa | ویکسا</title>
         </Head>
-        <div>
+        <Layout>
           <CssBaseline />
           <Component {...pageProps} />
-        </div>
+        </Layout>
       </RTL>
     </CacheProvider>
   );
