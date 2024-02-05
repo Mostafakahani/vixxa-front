@@ -18,6 +18,7 @@ import {
   TemplateIcon,
   UserIcon,
 } from "../Icons/icon";
+import { useRouter } from "next/router";
 
 function Header() {
   const [headerItems, setHeaderItems] = useState([
@@ -26,6 +27,7 @@ function Header() {
     { text: "ارتباط با ما", url: "/templates", icon: <ContactIcon /> },
   ]);
 
+  const router = useRouter();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -101,6 +103,7 @@ function Header() {
                   },
                 }}
                 startIcon={<UserIcon />}
+                onClick={() => router.push("/login")}
               >
                 ورود
               </Button>

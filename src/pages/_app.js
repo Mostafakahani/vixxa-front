@@ -6,6 +6,8 @@ import RTL from "./RTL";
 import Head from "next/head";
 import { CssBaseline } from "@mui/material";
 import Layout from "../../Componenets/Layout/Layout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -22,6 +24,7 @@ export default function App(props) {
           <title>Vixxa | ویکسا</title>
         </Head>
         <Layout>
+          <ToastContainer closeOnClick rtl />
           <CssBaseline />
           <Component {...pageProps} />
         </Layout>

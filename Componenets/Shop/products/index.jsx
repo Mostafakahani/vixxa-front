@@ -142,7 +142,7 @@ function Products({ items }) {
                     sx={{
                       backgroundColor: "#5C7CFF",
                       borderRadius: 3,
-                      boxShadow: "0px 7px 20px -5px #5C7CFF",
+                      boxShadow: "0px 7px 20px -5px #4469ff",
                       fontSize: 13,
                       px: 2,
                       py: 1,
