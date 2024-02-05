@@ -116,6 +116,15 @@ function Products({ items }) {
                 </Grid>
               </Grid>
               <Grid
+                container
+                sx={{
+                  borderRadius: 5,
+                  border: "1px solid #00000012",
+                  position: "relative",
+                  bottom: 50,
+                }}
+              />
+              <Grid
                 item
                 container
                 // columnSpacing={1}
