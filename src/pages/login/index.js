@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios"; // Import Axios
 import Login from "../../../Templates/Auth/Login";
@@ -111,6 +111,29 @@ function LoginPage() {
             setUserData={(e) => setUserData(e)}
             handleLogin={handleLogin} // Pass the handleLogin function to the Login component
           />
+          <Grid
+            item
+            container
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="body2">حساب نداری؟</Typography>
+              <Button onClick={() => router.push("/register")}>
+                برای ساخت حساب کاربری کلیک کنید
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Container>
     </>

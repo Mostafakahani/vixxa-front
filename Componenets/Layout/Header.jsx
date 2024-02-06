@@ -42,11 +42,9 @@ function Header() {
   useEffect(() => {
     if (getCookie("token")) {
       setIsLogin(true);
-      console.log("token");
     } else {
       setIsLogin(false);
     }
-    console.log("path");
   }, [router.pathname]);
   return (
     <Container sx={{ position: "sticky" }} maxWidth={false} disableGutters>
@@ -121,7 +119,7 @@ function Header() {
                     حساب کاربری
                   </Button>
                   <IconButton
-                  size="small"
+                    size="small"
                     sx={{
                       display: { xs: "flex", lg: "none" },
                       bgcolor: "#4A6DFF",

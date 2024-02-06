@@ -9,7 +9,7 @@ function Footer() {
           <Grid
             container
             sx={{
-              boxShadow: "0px 9px 120px -15px #00000075",
+              // boxShadow: "0px 9px 120px -15px #00000075",
               px: 2,
               display: "flex",
               justifyContent: "center",
