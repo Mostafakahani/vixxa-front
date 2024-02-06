@@ -7,8 +7,10 @@ import { Server } from "../../../config";
 import { getCookie, setCookie } from "../../../Cookie";
 import { token } from "stylis";
 import { useRouter } from "next/router";
+import { unstable_noStore as noStore } from "next/cache";
 
 function LoginPage() {
+  noStore();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -19,7 +21,6 @@ function LoginPage() {
       router.push("/");
     }
   }, [router]);
-
   const handleLogin = async () => {
     try {
       const token = getCookie("token");

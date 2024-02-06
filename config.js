@@ -1,3 +1,3 @@
 export const Server = {
-  URL: "http://localhost:3005",
+  URL: process.env.BASE_URL || 'https://api.vixxa.ir',
 };
