@@ -13,12 +13,12 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const router = useRouter();
   useEffect(() => {
     if (getCookie("token")) {
       router.push("/");
     }
-  }, []);
-  const router = useRouter();
+  }, [router]);
 
   const handleLogin = async () => {
     try {

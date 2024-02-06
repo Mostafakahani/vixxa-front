@@ -15,12 +15,12 @@ function RegisterPage() {
     password: "",
     fullName: "",
   });
+  const router = useRouter();
   useEffect(() => {
     if (getCookie("token")) {
       router.push("/");
     }
-  }, []);
-  const router = useRouter();
+  }, [router]);
 
   const handleRegister = async () => {
     try {
