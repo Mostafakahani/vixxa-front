@@ -7,11 +7,13 @@ import { Server } from "../../../config";
 import { getCookie, setCookie } from "../../../Cookie";
 import { token } from "stylis";
 import { useRouter } from "next/router";
+import Register from "../../../Templates/Auth/Register";
 
-function LoginPage() {
+function RegisterPage() {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
+    fullName: "",
   });
   useEffect(() => {
     if (getCookie("token")) {
@@ -20,7 +22,7 @@ function LoginPage() {
   }, []);
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     try {
       const token = getCookie("token");
       if (token) {
@@ -30,10 +32,11 @@ function LoginPage() {
       }
 
       const response = await axios.post(
-        `${Server.URL}/auth/login`,
+        `${Server.URL}/auth/register`,
         {
           email: userData.email,
           password: userData.password,
+          fullName: userData.fullName,
         },
         {
           withCredentials: true,
@@ -44,9 +47,9 @@ function LoginPage() {
       );
 
       if (response.status === 200) {
-        setCookie("token", response.data.token);
-        toast.success("با موفقیت وارد شدید");
-        router.push("/");
+        // setCookie("token", response.data.token);
+        toast.success("اکانت با موفقیت ساخته شد");
+        router.push("/login");
       }
     } catch (error) {
       toast.error("دوباره تلاش کنید");
@@ -102,13 +105,13 @@ function LoginPage() {
                 fontSize: { xs: "14px", sm: "1rem" },
               }}
             >
-              ورود
+              ثبت نام
             </Typography>
           </Grid>
-          <Login
+          <Register
             userData={userData}
             setUserData={(e) => setUserData(e)}
-            handleLogin={handleLogin} // Pass the handleLogin function to the Login component
+            handleRegister={handleRegister} // Pass the handleLogin function to the Login component
           />
           <Grid
             item
@@ -127,9 +130,9 @@ function LoginPage() {
                 justifyContent: "center",
               }}
             >
-              <Typography variant="body2">حساب نداری؟</Typography>
-              <Button onClick={() => router.push("/register")}>
-                برای ساخت حساب کاربری کلیک کنید
+              <Typography variant="body2">حساب داری؟</Typography>
+              <Button onClick={() => router.push("/login")}>
+                برای ورود به حساب کاربری کلیک کنید
               </Button>
             </Grid>
           </Grid>
@@ -139,4 +142,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
