@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BasketIcon,
   ComponentIcon,
@@ -19,6 +19,7 @@ import {
   UserIcon,
 } from "../Icons/icon";
 import { useRouter } from "next/router";
+import { getCookie } from "../../Cookie";
 
 function Header() {
   const [headerItems, setHeaderItems] = useState([
@@ -28,6 +29,7 @@ function Header() {
   ]);
 
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -37,7 +39,15 @@ function Header() {
   const handleDrawerClose = () => {
     setDrawerOpen(false);
   };
-
+  useEffect(() => {
+    if (getCookie("token")) {
+      setIsLogin(true);
+      console.log("token");
+    } else {
+      setIsLogin(false);
+    }
+    console.log("path");
+  }, [router.pathname]);
   return (
     <Container sx={{ position: "sticky" }} maxWidth={false} disableGutters>
       <header>
@@ -91,22 +101,57 @@ function Header() {
               </IconButton>
             </Grid>
             <Grid item>
-              <Button
-                color="inherit"
-                sx={{
-                  bgcolor: "#4A6DFF",
-                  borderRadius: 5,
-                  px: 2,
-                  color: "#FFFFFF",
-                  "&:hover": {
-                    color: "#4A6DFF",
-                  },
-                }}
-                startIcon={<UserIcon />}
-                onClick={() => router.push("/login")}
-              >
-                ورود
-              </Button>
+              {isLogin ? (
+                <>
+                  <Button
+                    color="inherit"
+                    sx={{
+                      bgcolor: "#4A6DFF",
+                      borderRadius: 5,
+                      px: 2,
+                      color: "#FFFFFF",
+                      "&:hover": {
+                        color: "#4A6DFF",
+                      },
+                      display: { xs: "none", lg: "flex" },
+                    }}
+                    startIcon={<UserIcon />}
+                    onClick={() => router.push("/dashboard")}
+                  >
+                    حساب کاربری
+                  </Button>
+                  <IconButton
+                  size="small"
+                    sx={{
+                      display: { xs: "flex", lg: "none" },
+                      bgcolor: "#4A6DFF",
+                      color: "#FFFFFF",
+                      "&:hover": {
+                        color: "#4A6DFF",
+                      },
+                    }}
+                  >
+                    <UserIcon />
+                  </IconButton>
+                </>
+              ) : (
+                <Button
+                  color="inherit"
+                  sx={{
+                    bgcolor: "#4A6DFF",
+                    borderRadius: 5,
+                    px: 2,
+                    color: "#FFFFFF",
+                    "&:hover": {
+                      color: "#4A6DFF",
+                    },
+                  }}
+                  startIcon={<UserIcon />}
+                  onClick={() => router.push("/login")}
+                >
+                  ورود
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Grid>

@@ -1,18 +1,34 @@
 import { Container, Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios"; // Import Axios
 import Login from "../../../Templates/Auth/Login";
 import { toast } from "react-toastify";
 import { Server } from "../../../config";
+import { getCookie, setCookie } from "../../../Cookie";
+import { token } from "stylis";
+import { useRouter } from "next/router";
 
 function LoginPage() {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
+  useEffect(() => {
+    if (getCookie("token")) {
+      router.push("/");
+    }
+  }, []);
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
+      const token = getCookie("token");
+      if (token) {
+        toast.success("شما لاگین شده اید");
+        router.push("/");
+        return;
+      }
+
       const response = await axios.post(
         `${Server.URL}/auth/login`,
         {
@@ -26,10 +42,12 @@ function LoginPage() {
           },
         }
       );
+
       if (response.status === 200) {
+        setCookie("token", response.data.token);
         toast.success("با موفقیت وارد شدید");
+        router.push("/");
       }
-      //   console.log("با موفقیت وارد شدید", response.data);
     } catch (error) {
       toast.error("دوباره تلاش کنید");
       console.error("Login failed", error);
