@@ -18,12 +18,13 @@ import {
   BasketIcon,
   ComponentIcon,
   ContactIcon,
+  ExitIcon,
   OpenLinkIcon,
   TemplateIcon,
   UserIcon,
 } from "../Icons/icon";
 import { useRouter } from "next/router";
-import { getCookie } from "../../Cookie";
+import { eraseCookie, getCookie } from "../../Cookie";
 
 function Header() {
   const [headerItems, setHeaderItems] = useState([
@@ -34,7 +35,7 @@ function Header() {
   const [isLoginItem, setIsLoginItem] = useState([
     { text: "داشبورد", url: "/dashboard", icon: <ComponentIcon /> },
     { text: "سفارشات", url: "/orders", icon: <TemplateIcon /> },
-    { text: "خروج", url: "/logout", icon: <ContactIcon /> },
+    { text: "خروج", url: "/logout", icon: <ExitIcon /> },
   ]);
 
   const router = useRouter();
@@ -53,7 +54,10 @@ function Header() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
+  const logOut = () => {
+    eraseCookie("token");
+    router.push("/login");
+  };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -63,7 +67,7 @@ function Header() {
     } else {
       setIsLogin(false);
     }
-  }, [router.pathname]);
+  }, [router.route]);
   return (
     <Container sx={{ position: "sticky" }} maxWidth={false} disableGutters>
       <header>
@@ -183,7 +187,10 @@ function Header() {
                       {isLoginItem.map((setting) => (
                         <MenuItem
                           key={setting.text}
-                          onClick={handleCloseUserMenu}
+                          onClick={() => {
+                            handleCloseUserMenu();
+                            logOut();
+                          }}
                           sx={{ display: "flex" }}
                         >
                           {setting.icon}
