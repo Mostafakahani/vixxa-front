@@ -15,6 +15,8 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
   useEffect(() => {
     if (getCookie("token")) {
@@ -22,6 +24,8 @@ function LoginPage() {
     }
   }, [router]);
   const handleLogin = async () => {
+    setLoading(true);
+
     try {
       const token = getCookie("token");
       if (token) {
@@ -47,11 +51,30 @@ function LoginPage() {
       if (response.status === 200) {
         setCookie("token", response.data.token);
         toast.success("با موفقیت وارد شدید");
+        setLoading(false);
+
         router.push("/");
       }
     } catch (error) {
-      toast.error("دوباره تلاش کنید");
-      console.error("Login failed", error);
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errors = Array.isArray(error.response.data.errors)
+          ? error.response.data.errors.map((x) => x.msg)
+          : ["Unknown errors"];
+        toast.error(errors.join(" - "));
+        setLoading(false);
+      }
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        setLoading(false);
+        toast.error("مشکلی پیش آمده لطفا بعدا تلاش کنید");
+        console.error("Login failed", error);
+      }
+      setLoading(false);
     }
   };
 
@@ -109,7 +132,9 @@ function LoginPage() {
           <Login
             userData={userData}
             setUserData={(e) => setUserData(e)}
-            handleLogin={handleLogin} // Pass the handleLogin function to the Login component
+            handleLogin={handleLogin}
+            loading={loading}
+            setLoading={(e) => setLoading(e)}
           />
           <Grid
             item

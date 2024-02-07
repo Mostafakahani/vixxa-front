@@ -1,7 +1,30 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 
-function Login({ userData, setUserData, handleLogin }) {
+function Login({ userData, setUserData, handleLogin, loading }) {
+  const [errors, setErrors] = useState({ email: false, password: false });
+
+  const validateForm = () => {
+    const newErrors = {
+      email: userData.email.trim() === "",
+      password: userData.password.trim().length < 6,
+    };
+    setErrors(newErrors);
+    return !newErrors.email && !newErrors.password;
+  };
+
+  const handleSubmit = () => {
+    if (validateForm()) {
+      handleLogin();
+    }
+  };
+
   return (
     <Grid item container rowSpacing={2}>
       <Grid item xs={12}>
@@ -15,6 +38,8 @@ function Login({ userData, setUserData, handleLogin }) {
           value={userData.email}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
           InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          error={errors.email}
+          helperText={errors.email ? "ایمیل را وارد کنید" : ""}
         />
       </Grid>
       <br />
@@ -31,6 +56,10 @@ function Login({ userData, setUserData, handleLogin }) {
             setUserData({ ...userData, password: e.target.value })
           }
           InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          error={errors.password}
+          helperText={
+            errors.password ? "رمز عبور باید حداقل شش کاراکتر داشته باشد" : ""
+          }
         />
       </Grid>
       <br />
@@ -50,9 +79,14 @@ function Login({ userData, setUserData, handleLogin }) {
               boxShadow: "0px 7px 20px -5px #5c7cffde",
             },
           }}
-          onClick={handleLogin}
+          onClick={handleSubmit}
+          disabled={loading}
         >
-          ورود به حساب کاربری
+          {loading ? (
+            <CircularProgress size={30} variant="indeterminate" />
+          ) : (
+            "ورود به حساب کاربری"
+          )}
         </Button>
       </Grid>
     </Grid>

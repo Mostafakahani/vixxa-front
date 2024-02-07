@@ -1,7 +1,35 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 
-function Register({ userData, setUserData, handleRegister }) {
+function Register({ userData, setUserData, handleRegister, loading }) {
+  const [errors, setErrors] = useState({
+    fullName: false,
+    email: false,
+    password: false,
+  });
+
+  const validateForm = () => {
+    const newErrors = {
+      fullName: userData.fullName.trim() === "",
+      email: userData.email.trim() === "",
+      password: userData.password.trim().length < 6,
+    };
+    setErrors(newErrors);
+    return !newErrors.fullName && !newErrors.email && !newErrors.password;
+  };
+
+  const handleSubmit = () => {
+    if (validateForm()) {
+      handleRegister();
+    }
+  };
+
   return (
     <Grid item container rowSpacing={2}>
       <Grid item xs={12}>
@@ -17,6 +45,9 @@ function Register({ userData, setUserData, handleRegister }) {
             setUserData({ ...userData, fullName: e.target.value })
           }
           InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          error={errors.fullName}
+          helperText={errors.fullName ? "نام و نام خانوادگی را وارد کنید" : ""}
+          autoComplete="name"
         />
       </Grid>
       <br />
@@ -31,6 +62,9 @@ function Register({ userData, setUserData, handleRegister }) {
           value={userData.email}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
           InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          error={errors.email}
+          helperText={errors.email ? "ایمیل را وارد کنید" : ""}
+          autoComplete="email"
         />
       </Grid>
       <br />
@@ -47,9 +81,13 @@ function Register({ userData, setUserData, handleRegister }) {
             setUserData({ ...userData, password: e.target.value })
           }
           InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          error={errors.password}
+          helperText={
+            errors.password ? "رمز عبور باید حداقل شش کاراکتر داشته باشد" : ""
+          }
+          autoComplete="password"
         />
       </Grid>
-
       <br />
       <Grid item xs={12}>
         <Button
@@ -67,9 +105,14 @@ function Register({ userData, setUserData, handleRegister }) {
               boxShadow: "0px 7px 20px -5px #5c7cffde",
             },
           }}
-          onClick={handleRegister}
+          onClick={handleSubmit}
+          disabled={loading}
         >
-          ثبت نام در ویکسا
+          {loading ? (
+            <CircularProgress size={30} variant="indeterminate" />
+          ) : (
+            "ثبت نام در ویکسا"
+          )}
         </Button>
       </Grid>
     </Grid>
