@@ -19,8 +19,6 @@
     url(/fonts/ModamFaNumWeb-Black.woff2) format("woff2");
 }
 
-
-
 @font-face {
   font-family: "modam";
   font-weight: 600;
@@ -31,10 +29,37 @@
 * {
   direction: rtl;
   user-select: none !important;
-  font-family: 'modam' !important;
+  font-family: "modam" !important;
   text-decoration-line: none !important;
 }
 
 body {
-  background-color: #F4F5F7 !important;
+  background-color: #f4f5f7 !important;
+}
+
+.ql-picker-label,
+.ql-formats,
+.ql-toolbar,
+.ql-snow,
+.ql-picker-options,
+.ql-picker-item,
+.ql-header,
+.ql-bold,
+.ql-italic,
+.ql-underline,
+.ql-link,
+.ql-list,
+.ql-container,
+.ql-snow,
+.ql-editor > *,
+.ql-blank,
+.ql-clipboard,
+.ql-tooltip,
+.ql-hidden,
+.ql-preview,
+.ql-remove,
+.ql-action,
+ul,
+li {
+  direction: ltr !important;
 }
