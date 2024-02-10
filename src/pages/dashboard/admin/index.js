@@ -12,6 +12,7 @@ import { Server } from "../../../../config";
 import axios from "axios";
 import { unstable_noStore as noStore } from "next/cache";
 import MyEditor from "../../../../Componenets/Editor/MyEditor";
+import CustomEditor from "../../../../Componenets/Editor/MyEditor";
 
 function AdminPage() {
   noStore();
@@ -109,7 +110,7 @@ function AdminPage() {
             value={editedProduct.price}
             onChange={handleChange}
           />
-          <MyEditor />
+          <CustomEditor />
           <TextField
             fullWidth
             label="Detail"

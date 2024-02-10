@@ -1,20 +1,46 @@
-import dynamic from "next/dynamic";
+import React, { useState, useEffect } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { TextField, Button, Typography } from '@mui/material';
 
-const Editor = dynamic(
-  () => import("@tinymce/tinymce-react").then((module) => module.Editor),
-  { ssr: false }
-);
+const CustomEditor = () => {
+  const [text, setText] = useState('');
+  const [htmlInput, setHtmlInput] = useState('');
 
-function MyEditor() {
+  useEffect(() => {
+    setHtmlInput(text);
+  }, [text]);
+
+  const handleHtmlInputChange = (event) => {
+    setHtmlInput(event.target.value);
+  };
+
+  const applyHtmlChanges = () => {
+    setText(htmlInput);
+  };
+
   return (
-    <Editor
-      apiKey="c5ntc8vol3nhrs0iyi8gb6d83a3yoyl5omfaqs38ozl5wehy" // Replace this with your actual TinyMCE API key
-      init={{
-        height: 500,
-        menubar: true,
-      }}
-    />
+    <div>
+      <Typography variant="h5">Custom Editor</Typography>
+      <ReactQuill 
+        theme="snow"
+        value={text}
+        onChange={setText}
+      />
+      <TextField
+        multiline
+        rows={4}
+        variant="outlined"
+        label="HTML Input"
+        value={htmlInput}
+        onChange={handleHtmlInputChange}
+        sx={{ mt: 2, mb: 2, width: '100%' }}
+      />
+      <Button variant="contained" onClick={applyHtmlChanges}>
+        Apply HTML Changes
+      </Button>
+    </div>
   );
-}
+};
 
-export default MyEditor;
+export default CustomEditor;
