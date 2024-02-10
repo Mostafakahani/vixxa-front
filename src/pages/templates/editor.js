@@ -1,4 +1,4 @@
-import MyEditor from "../../../Componenets/Editor/CreateProduct";
+import MyEditor from "../../../Componenets/Editor/MyEditor";
 
 function MyPage() {
   return <MyEditor />;
