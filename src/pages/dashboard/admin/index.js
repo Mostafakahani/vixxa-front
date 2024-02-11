@@ -73,6 +73,25 @@ function AdminPage() {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleDelete = async () => {
+    try {
+      const response = await axios.post(
+        Server.URL + `/products/delete/${editedProduct.id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        toast.success("با موفقیت بروز شد");
+        setOpen(false);
+        setUpdate(update + 1);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("مشکلی پیش آمده است");
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -227,6 +246,7 @@ function AdminPage() {
                     disableElevation
                     variant="text"
                     color="error"
+                    onClick={handleDelete}
                   >
                     حذف محصول
                   </Button>
