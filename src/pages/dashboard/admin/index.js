@@ -83,7 +83,7 @@ function AdminPage() {
         }
       );
       if (response.status === 200) {
-        toast.success("با موفقیت بروز شد");
+        toast.success("با موفقیت حذف شد");
         setOpen(false);
         setUpdate(update + 1);
       }
