@@ -49,7 +49,7 @@ function LoginPage() {
       );
 
       if (response.status === 200) {
-        setCookie("token", response.data.token);
+        setCookie("token", response.data.token, 3600);
         toast.success("با موفقیت وارد شدید");
         setLoading(false);
 

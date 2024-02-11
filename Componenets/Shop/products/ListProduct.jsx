@@ -2,7 +2,7 @@ import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { CardIcon, DownloadIcon } from "../../Icons/icon";
 
-function Products({ items }) {
+function ListProduct({ items, handleEdit }) {
   return (
     <>
       <Grid item container columnSpacing={2} rowSpacing={{ xs: 2, sm: 2 }}>
@@ -28,7 +28,7 @@ function Products({ items }) {
                 borderRadius: 3,
                 bgcolor: "#fff",
                 position: "relative",
-                height: "320px",
+                height: "280px",
               }}
               p={2}
             >
@@ -51,7 +51,9 @@ function Products({ items }) {
                     objectPosition: "center",
                     // m: 2,
                   }}
-                  src={item?.imageUrl}
+                  src={`${
+                    item.imageUrl || "/next.svg"
+                  }?h=auto&fit=crop&auto=format`}
                   alt={item?.name}
                 />
               </Grid>
@@ -81,23 +83,13 @@ function Products({ items }) {
                 item
                 xs={12}
                 display={"flex"}
-                justifyContent={"center"}
+                justifyContent={"flex-start"}
                 alignItems={"center"}
                 sx={{ position: "relative", bottom: "60px" }}
               >
-                <p
-                  style={{
-                    textAlign: "left",
-                    fontSize: "15px",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                    width: " 100%",
-                    whiteSpace: "nowrap",
-                    direction: "ltr",
-                  }}
-                >
-                  {item?.detail}
-                </p>
+                <Typography variant="body2" sx={{ mr: 1 }}>
+                  اطلاعاتی بصورت امتحانی
+                </Typography>
               </Grid>
               <Grid
                 item
@@ -136,6 +128,7 @@ function Products({ items }) {
               >
                 <Grid item xs={6}>
                   <Button
+                    onClick={() => handleEdit(item)}
                     disableElevation
                     fullWidth
                     variant="contained"
@@ -152,7 +145,7 @@ function Products({ items }) {
                       },
                     }}
                   >
-                    دریافت محصول
+                    ویرایش
                   </Button>
                 </Grid>
                 <Grid
@@ -168,7 +161,7 @@ function Products({ items }) {
                   <Grid item display={"flex"} alignItems={"center"}>
                     {/* <CardIcon size="18" /> */}
                     <Typography variant="body2" sx={{ ml: 1 }}>
-                      15,000 تومان
+                      {item.price} تومان
                     </Typography>
                   </Grid>
                 </Grid>
@@ -181,4 +174,4 @@ function Products({ items }) {
   );
 }
 
-export default Products;
+export default ListProduct;

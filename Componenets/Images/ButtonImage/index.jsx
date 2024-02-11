@@ -106,9 +106,6 @@ export default function ButtonImage({
         setData(response.data.files);
       } catch (error) {
         console.error("Error fetching data:", error);
-        if (!isCancelled) {
-          setRequestError("Error fetching data. Please try again.");
-        }
       }
     }
 

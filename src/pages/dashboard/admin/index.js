@@ -10,6 +10,8 @@ import {
   Typography,
   Box,
   Container,
+  CircularProgress,
+  MenuItem,
 } from "@mui/material";
 import { Server } from "../../../../config";
 import axios from "axios";
@@ -17,6 +19,9 @@ import { unstable_noStore as noStore } from "next/cache";
 import CustomEditor from "../../../../Componenets/Editor/CustomEditor";
 import ButtonImage from "../../../../Componenets/Images/ButtonImage";
 import { toast } from "react-toastify";
+import NewProduct from "../../../../Componenets/Product/NewProduct";
+import ListProduct from "../../../../Componenets/Shop/products/ListProduct";
+import EditProduct from "../../../../Componenets/Product/EditProduct";
 
 function AdminPage() {
   noStore();
@@ -25,6 +30,9 @@ function AdminPage() {
   const [update, setUpdate] = useState(0);
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [openDialogNewProduct, setOpenDialogNewProduct] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [categoriesUpdate, setCategoriesUpdate] = useState(0);
   const [openDialogImage, setOpenDialogImage] = useState(false);
 
   const [editedProduct, setEditedProduct] = useState({
@@ -56,7 +64,23 @@ function AdminPage() {
   useEffect(() => {
     getData();
   }, [update]);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          Server.URL + "/category/list",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchData();
+  }, [categoriesUpdate]);
   const handleEdit = (product) => {
     setSelectedProduct(product);
     setEditedProduct({
@@ -66,6 +90,7 @@ function AdminPage() {
       detail: product?.detail,
       imageUrl: product?.imageUrl,
       image: product?.image,
+      category: product?.category,
     });
     setOpen(true);
   };
@@ -131,131 +156,56 @@ function AdminPage() {
 
   return (
     <>
-      <Grid container spacing={2}>
-        {data.map((item, index) => (
-          <Grid item xs={12} sm={4} md={4} key={index}>
-            <Box
-              component={"img"}
-              src={item.imageUrl || "/next.svg"}
-              sx={{ width: "100px" }}
-            />
-            <Typography
-              sx={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                width: "90%",
-              }}
-            >
-              {item.name}
-            </Typography>
-            <Button variant="contained" onClick={() => handleEdit(item)}>
-              Edit
-            </Button>
-          </Grid>
-        ))}
+      <Grid container>
+        <Grid item sm={6}>
+          <Button onClick={() => setOpenDialogNewProduct(true)}>
+            افزودن محصول
+          </Button>
+        </Grid>
+        <Grid item sm={6} sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button>افزودن دسته بندی</Button>
+        </Grid>
       </Grid>
-
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
-        <DialogTitle>ویرایش محصول {editedProduct.name}</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={2} my={1}>
-            <Grid item xs={10}>
-              <TextField
-                fullWidth
-                label="نام محصول"
-                name="name"
-                value={editedProduct.name}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={2}>
-              <TextField
-                fullWidth
-                label="قیمت"
-                name="price"
-                value={editedProduct.price}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <CustomEditor
-                value={editedProduct.detail}
-                onChange={(value) =>
-                  setEditedProduct((prev) => ({ ...prev, detail: value }))
-                }
-              />
-            </Grid>
-            <Grid item container xs={12}>
-              <Grid item xs={12}>
-                <Box
-                  component={"img"}
-                  src={`${
-                    editedProduct.imageUrl || "/next.svg"
-                  }?h=auto&fit=crop&auto=format`}
-                  sx={{ width: "100%", height: "300px", objectFit: "contain" }}
-                />
-              </Grid>
-              <Grid item xs={12} container>
-                <ButtonImage
-                  open={openDialogImage}
-                  setOpen={(e) => setOpenDialogImage(e)}
-                  imageUrlLink={(e) =>
-                    setEditedProduct((prev) => ({ ...prev, imageUrl: e }))
-                  }
-                  onChange={(e) =>
-                    setEditedProduct((prev) => ({
-                      ...prev,
-                      image: e,
-                    }))
-                  }
-                />
-              </Grid>
-            </Grid>
+      <Grid container spacing={2}>
+        {loading ? (
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              justifyContent: "cener",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress />
           </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Container maxWidth="sm">
-            <Grid container spacing={1}>
-              <Grid item container>
-                <Button
-                  fullWidth
-                  disableElevation
-                  onClick={handleSave}
-                  variant="contained"
-                  color="primary"
-                >
-                  ذخیره
-                </Button>
-              </Grid>
-              <Grid item container spacing={2}>
-                <Grid item xs={6}>
-                  <Button
-                    fullWidth
-                    disableElevation
-                    onClick={handleClose}
-                    variant="outlined"
-                    color="error"
-                  >
-                    کنسل
-                  </Button>
-                </Grid>
-                <Grid item xs={6}>
-                  <Button
-                    fullWidth
-                    disableElevation
-                    variant="text"
-                    color="error"
-                    onClick={handleDelete}
-                  >
-                    حذف محصول
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Container>
-        </DialogActions>
-      </Dialog>
+        ) : (
+          <>
+            <ListProduct items={data} handleEdit={(e) => handleEdit(e)} />
+          </>
+        )}
+      </Grid>
+      <NewProduct
+        onChange={(e) => {
+          setUpdate(update + 1);
+        }}
+        openDialogNewProduct={openDialogNewProduct}
+        setOpenDialogNewProduct={() => setOpenDialogNewProduct(false)}
+      />
+
+      <EditProduct
+        categoriesUpdate={categoriesUpdate}
+        setCategoriesUpdate={setCategoriesUpdate}
+        openDialogImage={openDialogImage}
+        setOpenDialogImage={setOpenDialogImage}
+        open={open}
+        handleClose={handleClose}
+        editedProduct={editedProduct}
+        setEditedProduct={setEditedProduct}
+        handleSave={handleSave}
+        categories={categories}
+        handleDelete={handleDelete}
+        handleChange={handleChange}
+      />
     </>
   );
 }
