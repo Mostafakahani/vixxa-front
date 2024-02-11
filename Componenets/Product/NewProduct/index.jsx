@@ -72,8 +72,8 @@ function NewProduct({
       );
       if (response.status === 200) {
         toast.success("با موفقیت ساخته شد");
-        onChange(update + 1);
-        setOpenDialogNewProduct()
+        onChange(1);
+        setOpenDialogNewProduct();
         handleClose();
       }
     } catch (error) {

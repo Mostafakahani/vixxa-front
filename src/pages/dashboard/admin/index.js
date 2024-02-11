@@ -5,7 +5,7 @@ import axios from "axios";
 import { unstable_noStore as noStore } from "next/cache";
 import { toast } from "react-toastify";
 import NewProduct from "../../../../Componenets/Product/NewProduct";
-import ListProduct from "../../../../Componenets/Shop/products/ListProduct";
+import ListProduct from "../../../../Componenets/Product/ListProduct/ListProduct";
 import EditProduct from "../../../../Componenets/Product/EditProduct";
 import NewCategory from "../../../../Componenets/Product/NewCategory";
 
@@ -51,6 +51,7 @@ function AdminPage() {
   useEffect(() => {
     getData();
   }, [update]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -140,7 +141,11 @@ function AdminPage() {
       toast.error("مشکلی پیش آمده است");
     }
   };
-
+  // if (data.length === 0) {
+  //   return (
+  //     <h2 style={{ width: "100%", textAlign: "center" }}>موردی یافت نشد</h2>
+  //   );
+  // }
   return (
     <>
       <Grid container>
@@ -162,11 +167,29 @@ function AdminPage() {
             container
             sx={{
               display: "flex",
-              justifyContent: "cener",
+              flexDirection: "row",
+              justifyContent: "center",
               alignItems: "center",
+              alignContent: "center",
+              height: "70vh",
             }}
           >
             <CircularProgress />
+          </Grid>
+        ) : data.length === 0 ? (
+          <Grid item xs={12}>
+            <h2
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                height: "70vh",
+              }}
+            >
+              موردی یافت نشد
+            </h2>
           </Grid>
         ) : (
           <>
