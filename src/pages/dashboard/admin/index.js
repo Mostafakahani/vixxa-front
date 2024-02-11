@@ -1,27 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  Grid,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Typography,
-  Box,
-  Container,
-  CircularProgress,
-  MenuItem,
-} from "@mui/material";
+import { Grid, Button, CircularProgress } from "@mui/material";
 import { Server } from "../../../../config";
 import axios from "axios";
 import { unstable_noStore as noStore } from "next/cache";
-import CustomEditor from "../../../../Componenets/Editor/CustomEditor";
-import ButtonImage from "../../../../Componenets/Images/ButtonImage";
 import { toast } from "react-toastify";
 import NewProduct from "../../../../Componenets/Product/NewProduct";
 import ListProduct from "../../../../Componenets/Shop/products/ListProduct";
 import EditProduct from "../../../../Componenets/Product/EditProduct";
+import NewCategory from "../../../../Componenets/Product/NewCategory";
 
 function AdminPage() {
   noStore();
@@ -31,6 +17,7 @@ function AdminPage() {
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [openDialogNewProduct, setOpenDialogNewProduct] = useState(false);
+  const [openDialogNewCategory, setOpenDialogNewCategory] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoriesUpdate, setCategoriesUpdate] = useState(0);
   const [openDialogImage, setOpenDialogImage] = useState(false);
@@ -163,12 +150,15 @@ function AdminPage() {
           </Button>
         </Grid>
         <Grid item sm={6} sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button>افزودن دسته بندی</Button>
+          <Button onClick={() => setOpenDialogNewCategory(true)}>
+            افزودن دسته بندی
+          </Button>
         </Grid>
       </Grid>
       <Grid container spacing={2}>
         {loading ? (
           <Grid
+            item
             container
             sx={{
               display: "flex",
@@ -191,7 +181,6 @@ function AdminPage() {
         openDialogNewProduct={openDialogNewProduct}
         setOpenDialogNewProduct={() => setOpenDialogNewProduct(false)}
       />
-
       <EditProduct
         categoriesUpdate={categoriesUpdate}
         setCategoriesUpdate={setCategoriesUpdate}
@@ -205,6 +194,10 @@ function AdminPage() {
         categories={categories}
         handleDelete={handleDelete}
         handleChange={handleChange}
+      />
+      <NewCategory
+        openDialogNewCategory={openDialogNewCategory}
+        setOpenDialogNewCategory={setOpenDialogNewCategory}
       />
     </>
   );
