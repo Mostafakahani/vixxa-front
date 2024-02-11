@@ -191,10 +191,10 @@ function Header() {
                             handleCloseUserMenu();
                             logOut();
                           }}
-                          sx={{ display: "flex" }}
+                          sx={{ display: "flex", justifyContent: 'flex-end' }}
                         >
-                          {setting.icon}
                           <Typography sx={{ ml: 1 }}>{setting.text}</Typography>
+                          {setting.icon}
                         </MenuItem>
                       ))}
                     </Menu>
