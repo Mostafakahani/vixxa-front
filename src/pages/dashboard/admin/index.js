@@ -127,6 +127,7 @@ function AdminPage() {
           detail: editedProduct?.detail,
           imageUrl: editedProduct?.imageUrl,
           image: editedProduct?.image,
+          category: editedProduct?.category,
         },
         {
           withCredentials: true,
@@ -136,6 +137,7 @@ function AdminPage() {
         toast.success("با موفقیت بروز شد");
         setOpen(false);
         setUpdate(update + 1);
+        console.log(editedProduct)
       }
     } catch (error) {
       console.log(error);

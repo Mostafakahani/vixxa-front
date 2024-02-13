@@ -188,10 +188,14 @@ function Header() {
                         <MenuItem
                           key={setting.text}
                           onClick={() => {
-                            handleCloseUserMenu();
-                            logOut();
+                            if (setting.text === "خروج") {
+                              logOut();
+                            } else {
+                              handleCloseUserMenu();
+                              router.push(setting.url); // هدایت کاربر به URL داخل متغیر setting
+                            }
                           }}
-                          sx={{ display: "flex", justifyContent: 'flex-end' }}
+                          sx={{ display: "flex", justifyContent: "flex-end" }}
                         >
                           <Typography sx={{ ml: 1 }}>{setting.text}</Typography>
                           {setting.icon}

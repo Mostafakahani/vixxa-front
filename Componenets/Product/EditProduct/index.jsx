@@ -27,6 +27,7 @@ function EditProduct({
   setOpenDialogImage,
   setCategoriesUpdate,
   categoriesUpdate,
+  
 }) {
   // const [openDialogImage, setOpenDialogImage] = useState(false);
 
