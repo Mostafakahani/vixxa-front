@@ -28,7 +28,7 @@ import { eraseCookie, getCookie } from "../../Cookie";
 
 function Header() {
   const [headerItems, setHeaderItems] = useState([
-    { text: "کامپوننت ها", url: "/componenets", icon: <ComponentIcon /> },
+    { text: "کامپوننت ها", url: "/components", icon: <ComponentIcon /> },
     { text: "تمپلیت ها", url: "/templates", icon: <TemplateIcon /> },
     { text: "ارتباط با ما", url: "/contact", icon: <ContactIcon /> },
   ]);

@@ -1,6 +1,7 @@
 import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { CardIcon, DownloadIcon } from "../../Icons/icon";
+import ViewDetail from "../../Product/ViewDetail";
 
 function Products({ items }) {
   return (
@@ -96,7 +97,7 @@ function Products({ items }) {
                     direction: "ltr",
                   }}
                 >
-                  {item?.detail}
+                  <ViewDetail html={item?.detail} />
                 </p>
               </Grid>
               <Grid
@@ -110,7 +111,7 @@ function Products({ items }) {
               >
                 <Grid item display={"flex"} alignItems={"center"}>
                   <Typography variant="body2" sx={{ mr: 1 }}>
-                    542
+                    {item?.downloads || "0"}
                   </Typography>
                   <DownloadIcon size="18" />
                 </Grid>
@@ -134,7 +135,7 @@ function Products({ items }) {
                 alignItems={"center"}
                 sx={{ position: "relative", bottom: "40px" }}
               >
-                <Grid item xs={6}>
+                <Grid item xs={7}>
                   <Button
                     disableElevation
                     fullWidth
@@ -157,7 +158,7 @@ function Products({ items }) {
                 </Grid>
                 <Grid
                   item
-                  xs={6}
+                  xs={5}
                   container
                   sx={{
                     display: "flex",
@@ -168,7 +169,7 @@ function Products({ items }) {
                   <Grid item display={"flex"} alignItems={"center"}>
                     {/* <CardIcon size="18" /> */}
                     <Typography variant="body2" sx={{ ml: 1 }}>
-                      15,000 تومان
+                      {item?.price} تومان
                     </Typography>
                   </Grid>
                 </Grid>

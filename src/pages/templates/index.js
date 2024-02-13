@@ -1,27 +1,12 @@
-import React, { useState } from "react";
-import { Container, Button } from "@mui/material";
-import QuillEditor from "../../../Componenets/Editor/RichTextEditor";
+import { Container } from "@mui/material";
+import TemplatesPage from "../../../Templates/Templates/TemplatesPage";
 
-const YourPage = () => {
-  const [richTextValue, setRichTextValue] = useState("");
-
-  const handleRichTextChange = (value) => {
-    setRichTextValue(value);
-  };
-
-  const handleSave = () => {
-    // Handle saving the rich text content
-    console.log(richTextValue);
-  };
-
+const Templates = () => {
   return (
     <Container>
-      <QuillEditor value={richTextValue} onChange={handleRichTextChange} />
-      <Button variant="contained" onClick={handleSave}>
-        Save
-      </Button>
+      <TemplatesPage />
     </Container>
   );
 };
 
-export default YourPage;
+export default Templates;

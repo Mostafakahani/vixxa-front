@@ -8,7 +8,8 @@ import NewProduct from "../../../../Componenets/Product/NewProduct";
 import ListProduct from "../../../../Componenets/Product/ListProduct/ListProduct";
 import EditProduct from "../../../../Componenets/Product/EditProduct";
 import NewCategory from "../../../../Componenets/Product/NewCategory";
-
+import jwt from "jsonwebtoken";
+import Head from "next/head";
 function AdminPage() {
   noStore();
   const [data, setData] = useState([]);
@@ -148,6 +149,12 @@ function AdminPage() {
   // }
   return (
     <>
+      <Head>
+        <title>Admin Panel</title>
+        <meta name="viewport" content="width=device-width, initial-scale" />
+        <meta name="robots" content="noindex" />
+        <meta name="googlebot" content="noindex" />
+      </Head>
       <Grid container>
         <Grid item sm={6}>
           <Button onClick={() => setOpenDialogNewProduct(true)}>
@@ -224,6 +231,27 @@ function AdminPage() {
       />
     </>
   );
+}
+export async function getServerSideProps(context) {
+  // const { Server } = require("../../../../config");
+  const token = context.req.cookies.token;
+  try {
+    const decodedToken = jwt.verify(token, Server.SECRET);
+    const isAdmin = decodedToken.isAdmin || false;
+    if (isAdmin) {
+      return {
+        props: {},
+      };
+    } else {
+      return {
+        notFound: true,
+      };
+    }
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default AdminPage;

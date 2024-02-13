@@ -4,7 +4,15 @@ import React from "react";
 function Footer() {
   return (
     <>
-      <Container maxWidth={false} disableGutters>
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{
+          position: "fixed",
+          bottom: "0",
+          paddingBottom: "20px",
+        }}
+      >
         <footer>
           <Grid
             container
@@ -17,7 +25,7 @@ function Footer() {
             }}
           >
             <Typography variant="body2" sx={{ fontWeight: 400, fontSize: 12 }}>
-             ویکسا | طراحی و توسعه Mostafa
+              ویکسا | طراحی و توسعه Mostafa
             </Typography>
           </Grid>
         </footer>
