@@ -13,12 +13,10 @@ function ShopPage({ data }) {
 
   useEffect(() => {
     async function fetchData() {
-      console.log(router.route);
       let url = "Components";
       if (router.route === "/templates") {
         url = "Templates";
       }
-      console.log(url);
       try {
         const response = await axios.get(Server.URL + `/products/lists/${url}`);
         setProducts(response.data);
