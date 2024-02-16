@@ -1,7 +1,16 @@
-export function setCookie(name, value, maxAgeInSeconds) {
-  const maxAge = maxAgeInSeconds ? `; max-age=${maxAgeInSeconds}` : "";
-  document.cookie = `${name}=${value || ""}${maxAge}; path=/`;
+export function setCookie(cname, cvalue, exdays = 1000000000) {
+  if (typeof window != "undefined") {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    window.document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 }
+// v old::
+// export function setCookie(name, value, maxAgeInSeconds) {
+//   const maxAge = maxAgeInSeconds ? `; max-age=${maxAgeInSeconds}` : "";
+//   document.cookie = `${name}=${value || ""}${maxAge}; path=/`;
+// }
 
 // export function setCookie(name, value, days) {
 //   var expires = "";
