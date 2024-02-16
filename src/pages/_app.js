@@ -1,12 +1,31 @@
 import "@/styles/globals.css";
 import RTL from "./RTL";
 import Head from "next/head";
-import { CssBaseline } from "@mui/material";
+import { CircularProgress, CssBaseline } from "@mui/material";
 import Layout from "../../Componenets/Layout/Layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const hasLoadedBefore = localStorage.getItem("hasLoadedBefore");
+
+    if (hasLoadedBefore) {
+      setIsLoading(false);
+    } else {
+      setTimeout(() => {
+        setIsLoading(false);
+        localStorage.setItem("hasLoadedBefore", true);
+      }, 1000);
+    }
+  }, []);
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
   return (
     <RTL>
       <Head>

@@ -9,7 +9,7 @@ function TemplatesPageDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true); // ابتدا راه اندازی با مقدار true
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     if (id) {
@@ -33,7 +33,7 @@ function TemplatesPageDetail() {
       console.error("An error occurred: ", error);
       toast.error("An error occurred");
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
@@ -44,6 +44,7 @@ function TemplatesPageDetail() {
   if (!data) {
     return <div>اطلاعاتی یافت نشد.</div>;
   }
+
   return (
     <>
       <DetailsItemPage data={data} />

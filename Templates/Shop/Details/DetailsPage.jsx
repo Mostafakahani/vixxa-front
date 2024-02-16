@@ -1,6 +1,4 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import ViewDetail from "../../../Componenets/Product/ViewDetail";
-import DOMPurify from "dompurify";
 import { CardIcon } from "../../../Componenets/Icons/icon";
 
 function DetailsItemPage({ data }) {
@@ -20,21 +18,16 @@ function DetailsItemPage({ data }) {
           >
             <Grid container item xs={12} md={6} rowSpacing={3}>
               <Grid container item xs={12}>
-                <Typography
-                  variant="h1"
-                  sx={{ fontSize: 32, fontWeight: "bold" }}
-                >
-                  {data?.product.name}
-                </Typography>
+                <h1>{data?.product.name}</h1>
               </Grid>
               <Grid container item xs={12}>
-                <Typography variant="p" sx={{ color: "#767676" }}>
+                <p style={{ color: "#767676" }}>
                   اگر میخواهیید یکبار برای همیشه به همه ابهامات قبل شروع برنامه
                   نویسی که در ذهن تون هست پاسخ داده شود، همچنین مسیر اصولی شروع
                   برنامه نویسی وب را برای خودتون ترسیم کنید، نحوه یادگیری اصولی
                   برنامه نویسی را بیاموزید و راه های کسب درآمد از برنامه نویسی
                   را یاد بگیرید؛ پس این دوره برای شماست.
-                </Typography>
+                </p>
               </Grid>
               <Grid
                 container
@@ -89,10 +82,10 @@ function DetailsItemPage({ data }) {
             </Grid>
             <Grid container item xs={12} md={6}>
               <Grid container item>
-                <Box
-                  component={"img"}
-                  src="https://vixxa.storage.iran.liara.space/1707681399257-banner.png"
-                  sx={{ width: "100%", height: "auto", borderRadius: 4 }}
+                <img
+                  src={data?.image?.url}
+                  alt="نمونه عکس"
+                  style={{ width: "100%", height: "auto", borderRadius: 4 }}
                 />
               </Grid>
             </Grid>
