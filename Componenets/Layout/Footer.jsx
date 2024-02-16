@@ -3,34 +3,24 @@ import React from "react";
 
 function Footer() {
   return (
-    <>
-      <Container
-        maxWidth={false}
-        disableGutters
-        sx={{
-          position: "fixed",
-          bottom: "0",
-          paddingBottom: "20px",
-        }}
-      >
-        <footer>
-          <Grid
-            container
-            sx={{
-              // boxShadow: "0px 9px 120px -15px #00000075",
-              px: 2,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Typography variant="body2" sx={{ fontWeight: 400, fontSize: 12 }}>
-              ویکسا | طراحی و توسعه Mostafa
-            </Typography>
-          </Grid>
-        </footer>
+    <footer
+      style={{
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        backgroundColor: "#fff", // Adjust as needed
+        zIndex: 1000, // Adjust as needed
+        padding: "10px 0",
+      }}
+    >
+      <Container disableGutters>
+        <Grid container justifyContent="center" alignItems="center">
+          <Typography variant="body2" sx={{ fontWeight: 400, fontSize: 12 }}>
+            ویکسا | طراحی و توسعه Mostafa
+          </Typography>
+        </Grid>
       </Container>
-    </>
+    </footer>
   );
 }
 

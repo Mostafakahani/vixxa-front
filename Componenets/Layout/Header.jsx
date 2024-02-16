@@ -96,7 +96,13 @@ function Header() {
                 component={"img"}
                 src="/next.svg"
                 width={100}
-                sx={{ cursor: "pointer" }}
+                sx={{
+                  cursor: "pointer",
+                  transition: "0.2s",
+                  "&:hover": {
+                    transform: "translateX(2px)",
+                  },
+                }}
                 onClick={() => router.push("/")}
               />
             </Grid>
@@ -106,6 +112,12 @@ function Header() {
                 color="inherit"
                 startIcon={x.icon}
                 onClick={() => router.push(x.url)}
+                sx={{
+                  transition: "0.2s",
+                  "&:hover": {
+                    transform: "translateY(-2px)",
+                  },
+                }}
               >
                 {x.text}
               </Button>
@@ -142,7 +154,9 @@ function Header() {
                             borderRadius: 5,
                             px: 2,
                             color: "#FFFFFF",
+                            transition: "0.2s",
                             "&:hover": {
+                              transform: "scale(1.1);",
                               color: "#4A6DFF",
                             },
                             display: { xs: "none", lg: "flex" },
@@ -192,7 +206,7 @@ function Header() {
                               logOut();
                             } else {
                               handleCloseUserMenu();
-                              router.push(setting.url); // هدایت کاربر به URL داخل متغیر setting
+                              router.push(setting.url);
                             }
                           }}
                           sx={{ display: "flex", justifyContent: "flex-end" }}

@@ -2,8 +2,10 @@ import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { CardIcon, DownloadIcon } from "../../Icons/icon";
 import ViewDetail from "../../Product/ViewDetail";
+import { useRouter } from "next/router";
 
 function Products({ items }) {
+  const router = useRouter();
   return (
     <>
       <Grid item container columnSpacing={2} rowSpacing={{ xs: 2, sm: 2 }}>
@@ -19,6 +21,9 @@ function Products({ items }) {
             justifyContent={"center"}
             alignItems={"center"}
             mt={6}
+            sx={{ cursor: "pointer" }}
+            onClick={() => router.push(router.asPath + "/" + item.id)}
+
             // sx={{ position: "relative", height: "350px" }}
           >
             <Grid
@@ -30,6 +35,12 @@ function Products({ items }) {
                 bgcolor: "#fff",
                 position: "relative",
                 height: "320px",
+                transition: "0.2s",
+                "&:hover": {
+                  transition: "0.2s",
+                  backgroundColor: "#e9e9e9",
+                  transform: "translateY(-5px)",
+                },
               }}
               p={2}
             >
@@ -50,7 +61,11 @@ function Products({ items }) {
                     position: "relative",
                     bottom: 50,
                     objectPosition: "center",
-                    // m: 2,
+                    transition: "0.2s",
+                    "&:hover": {
+                      // filter: "blur(1px)",
+                      transform: "translateY(-5px)",
+                    },
                   }}
                   src={item?.imageUrl}
                   alt={item?.name}
@@ -147,13 +162,15 @@ function Products({ items }) {
                       fontSize: 13,
                       px: 2,
                       py: 1,
+                      transition: "0.2s",
                       "&:hover": {
                         backgroundColor: "#5c7cffde",
                         boxShadow: "0px 7px 20px -5px #5c7cffde",
+                        transform: "translateY(-5px)",
                       },
                     }}
                   >
-                    دریافت محصول
+                   اطلاعات بیشتر
                   </Button>
                 </Grid>
                 <Grid

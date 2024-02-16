@@ -51,7 +51,7 @@ body {
 .ql-list,
 .ql-container,
 .ql-snow,
-.ql-editor > *,
+.ql-editor>*,
 .ql-blank,
 .ql-clipboard,
 .ql-tooltip,
@@ -62,4 +62,50 @@ body {
 ul,
 li {
   direction: ltr !important;
+}
+
+
+/* react-quill-styles.css */
+
+/* Align classes */
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-justify {
+  text-align: justify;
+}
+
+/* Background classes */
+.ql-bg-white {
+  background-color: #fff;
+}
+
+.ql-bg-black {
+  background-color: #000;
+}
+
+/* Color classes */
+.ql-color-primary {
+  color: #007bff;
+}
+
+.ql-color-success {
+  color: #28a745;
+}
+
+.ql-color-danger {
+  color: #dc3545;
+}
+
+.ql-color-warning {
+  color: #ffc107;
+}
+
+.ql-color-info {
+  color: #17a2b8;
 }
