@@ -25,6 +25,7 @@ import {
 } from "../Icons/icon";
 import { useRouter } from "next/router";
 import { eraseCookie, getCookie } from "../../Cookie";
+import Cookies from "js-cookie";
 
 function Header() {
   const [headerItems, setHeaderItems] = useState([
@@ -55,7 +56,8 @@ function Header() {
     setAnchorElUser(event.currentTarget);
   };
   const logOut = () => {
-    eraseCookie("token");
+    Cookies.remove("token");
+
     router.push("/login");
   };
   const handleCloseUserMenu = () => {
