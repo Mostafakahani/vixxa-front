@@ -32,13 +32,13 @@ function Products({ items }) {
               sx={{
                 boxShadow: 0,
                 borderRadius: 3,
-                bgcolor: "#fff",
+                bgcolor: "#031935",
                 position: "relative",
                 height: "320px",
                 transition: "0.2s",
                 "&:hover": {
                   transition: "0.2s",
-                  backgroundColor: "#e9e9e9",
+                  backgroundColor: "#0B2648",
                   transform: "translateY(-5px)",
                 },
               }}
@@ -88,6 +88,7 @@ function Products({ items }) {
                     whiteSpace: "nowrap",
                     fontSize: 16,
                     direction: "ltr",
+                    color: "#F5F5F6",
                   }}
                 >
                   {item?.name}
@@ -110,6 +111,7 @@ function Products({ items }) {
                     width: " 100%",
                     whiteSpace: "nowrap",
                     direction: "ltr",
+                    color: "#B0B1B6",
                   }}
                 >
                   <ViewDetail html={item?.detail} />
@@ -125,7 +127,7 @@ function Products({ items }) {
                 sx={{ position: "relative", bottom: "65px" }}
               >
                 <Grid item display={"flex"} alignItems={"center"}>
-                  <Typography variant="body2" sx={{ mr: 1 }}>
+                  <Typography variant="body2" sx={{ mr: 1, color: "#F5F5F6" }}>
                     {item?.downloads || "0"}
                   </Typography>
                   <DownloadIcon size="18" />
@@ -135,7 +137,7 @@ function Products({ items }) {
                 container
                 sx={{
                   borderRadius: 5,
-                  border: "1px solid #00000012",
+                  border: "1px solid #0930648a",
                   position: "relative",
                   bottom: 50,
                 }}
@@ -170,7 +172,7 @@ function Products({ items }) {
                       },
                     }}
                   >
-                   اطلاعات بیشتر
+                    اطلاعات بیشتر
                   </Button>
                 </Grid>
                 <Grid
@@ -185,7 +187,10 @@ function Products({ items }) {
                 >
                   <Grid item display={"flex"} alignItems={"center"}>
                     {/* <CardIcon size="18" /> */}
-                    <Typography variant="body2" sx={{ ml: 1 }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ ml: 1, color: "#F5F5F6" }}
+                    >
                       {item?.price} تومان
                     </Typography>
                   </Grid>

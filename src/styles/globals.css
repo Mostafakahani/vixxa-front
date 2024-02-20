@@ -1,3 +1,4 @@
+/* Font faces for Persian text */
 @font-face {
   font-family: "modam";
   font-weight: 200;
@@ -26,16 +27,79 @@
     url(/fonts/ModamFaNumWeb-SemiBold.woff2) format("woff2");
 }
 
+/* Font faces for English text */
+@font-face {
+  font-family: Gilroy;
+  font-weight: 200;
+  src: url(/fonts/Glory/Gilroy-Regular.woff2) format("woff2"),
+    url(/fonts/Glory/Gilroy-Regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: Gilroy;
+  font-weight: 800;
+  src: url(/fonts/Glory/Gilroy-Bold.woff2) format("woff2"),
+    url(/fonts/Glory/Gilroy-Bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: Gilroy;
+  font-weight: 900;
+  src: url(/fonts/Glory/Gilroy-Black.woff2) format("woff2"),
+    url(/fonts/Glory/Gilroy-Black.woff) format("woff");
+}
+
+@font-face {
+  font-family: Gilroy;
+  font-weight: 200;
+  src: url(/fonts/Glory/Gilroy-Light.woff2) format("woff2"),
+    url(/fonts/Glory/Gilroy-Light.woff) format("woff");
+}
+
+@font-face {
+  font-family: Gilroy;
+  font-weight: 600;
+  src: url(/fonts/Glory/Gilroy-Semibold.woff2) format("woff2"),
+    url(/fonts/Glory/Gilroy-Semibold.woff) format("woff");
+}
+
+@font-face {
+  font-family: Gilroy;
+  font-weight: 500;
+  src: url(/fonts/Glory/Gilroy-Medium.woff2) format("woff2"),
+    url(/fonts/Glory/Gilroy-Medium.woff) format("woff");
+}
+
+@font-face {
+  font-family: Gilroy;
+  font-weight: 950;
+  src: url(/fonts/Glory/Gilroy-Extrabold.woff2) format("woff2"),
+    url(/fonts/Glory/Gilroy-Extrabold.woff) format("woff");
+}
+
+/* Default styles for all elements */
 * {
   direction: rtl;
   user-select: none !important;
-  font-family: "modam" !important;
   text-decoration-line: none !important;
+  font-family: 'modam' !important;
 }
 
+/* Apply font families */
 body {
-  background-color: #f4f5f7 !important;
+  font-family: 'modam', 'Gilroy', sans-serif;
+  /* Default font for Persian text */
+  background-color: #041121 !important;
 }
+
+/* Select English text */
+
+
+
+/* body {
+  background-color: #041121 !important;
+} */
+/* background-color: #f4f5f7 !important; */
 
 .ql-picker-label,
 .ql-formats,

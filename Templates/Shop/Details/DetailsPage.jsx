@@ -18,10 +18,10 @@ function DetailsItemPage({ data }) {
           >
             <Grid container item xs={12} md={6} rowSpacing={3}>
               <Grid container item xs={12}>
-                <h1>{data?.product.name}</h1>
+                <h1 style={{ color: "#fff" }}>{data?.product.name}</h1>
               </Grid>
               <Grid container item xs={12}>
-                <p style={{ color: "#767676" }}>
+                <p style={{ color: "#F5F5F6" }}>
                   اگر میخواهیید یکبار برای همیشه به همه ابهامات قبل شروع برنامه
                   نویسی که در ذهن تون هست پاسخ داده شود، همچنین مسیر اصولی شروع
                   برنامه نویسی وب را برای خودتون ترسیم کنید، نحوه یادگیری اصولی
@@ -73,7 +73,10 @@ function DetailsItemPage({ data }) {
                     justifyContent={"flex-end"}
                   >
                     <CardIcon size="18" />
-                    <Typography variant="body2" sx={{ ml: 1 }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ ml: 1, color: "#F5F5F6" }}
+                    >
                       {data?.product.price} تومان
                     </Typography>
                   </Grid>
@@ -99,7 +102,7 @@ function DetailsItemPage({ data }) {
               justifyContent={"center"}
             >
               <div
-                style={{ width: "100%" }}
+                style={{ width: "100%", color: "#F5F5F6" }}
                 dangerouslySetInnerHTML={{
                   __html: data?.product.detail,
                 }}

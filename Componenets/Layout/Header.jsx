@@ -71,7 +71,11 @@ function Header() {
     }
   }, [router.route]);
   return (
-    <Container sx={{ position: "sticky" }} maxWidth={false} disableGutters>
+    <Container
+      sx={{ position: "sticky", bgcolor: "#031935" }}
+      maxWidth={false}
+      disableGutters
+    >
       <header>
         <Grid
           container
@@ -80,7 +84,7 @@ function Header() {
           {/* Mobile Menu Button */}
           <Grid item xs={6} sx={{ display: { md: "none", xs: "block" } }}>
             <IconButton size="large" onClick={handleDrawerOpen}>
-              <MenuIcon />
+              <MenuIcon sx={{ color: "#FFFFFF" }} />
             </IconButton>
           </Grid>
           <Grid
@@ -116,6 +120,7 @@ function Header() {
                 onClick={() => router.push(x.url)}
                 sx={{
                   transition: "0.2s",
+                  color: "#FFFFFF",
                   "&:hover": {
                     transform: "translateY(-2px)",
                   },
@@ -138,7 +143,7 @@ function Header() {
           >
             <Grid item>
               <IconButton size="large">
-                <BasketIcon />
+                <BasketIcon sx={{ color: "#FFFFFF" }} />
               </IconButton>
             </Grid>
             <Grid item>

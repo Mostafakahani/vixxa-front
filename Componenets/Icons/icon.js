@@ -19,6 +19,7 @@ export const BasketIcon = ({ size = "23" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    color="#ffffff"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
@@ -104,6 +105,7 @@ export const DownloadIcon = ({ size = "23" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    color="#ffffff"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
@@ -121,6 +123,7 @@ export const CardIcon = ({ size = "23" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    color="#F5F5F6"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
