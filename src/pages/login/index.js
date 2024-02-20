@@ -8,6 +8,7 @@ import { getCookie, setCookie } from "../../../Cookie";
 import { token } from "stylis";
 import { useRouter } from "next/router";
 import { unstable_noStore as noStore } from "next/cache";
+import Cookies from "js-cookie";
 
 function LoginPage() {
   noStore();
@@ -41,7 +42,7 @@ function LoginPage() {
           password: userData.password,
         },
         {
-          withCredentials: true,
+          // withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
@@ -49,7 +50,10 @@ function LoginPage() {
       );
 
       if (response.status === 200) {
-        setCookie("token", response.data.token, 3600);
+        Cookies.set("token", response.data.token, { domain: ".vixxa.ir" });
+
+        // setCookie("token", response.data.token, 3600);
+        // console.log(response.data.token);
         toast.success("با موفقیت وارد شدید");
         setLoading(false);
 

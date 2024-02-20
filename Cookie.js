@@ -1,11 +1,19 @@
-export function setCookie(cname, cvalue, exdays = 1000000000) {
-  if (typeof window != "undefined") {
+export function setCookie(
+  cname,
+  cvalue,
+  exdays = 1000000000,
+  domain = "api.vixxa.ir"
+) {
+  if (typeof window !== "undefined") {
     const d = new Date();
     d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
     let expires = "expires=" + d.toUTCString();
-    window.document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+    // Set the cookie with specific options
+    document.cookie = `${cname}=${cvalue}; ${expires}; path=/;  SameSite=None; Secure`;
   }
 }
+
 // v old::
 // export function setCookie(name, value, maxAgeInSeconds) {
 //   const maxAge = maxAgeInSeconds ? `; max-age=${maxAgeInSeconds}` : "";
@@ -42,5 +50,5 @@ export function getCookie(name) {
   return null;
 }
 export function eraseCookie(name) {
-  document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  document.cookie = name + "=; Max-Age=0";
 }
