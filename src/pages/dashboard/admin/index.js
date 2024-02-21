@@ -137,7 +137,7 @@ function AdminPage() {
         toast.success("با موفقیت بروز شد");
         setOpen(false);
         setUpdate(update + 1);
-        console.log(editedProduct)
+        console.log(editedProduct);
       }
     } catch (error) {
       console.log(error);

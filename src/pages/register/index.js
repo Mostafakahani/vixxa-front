@@ -94,7 +94,7 @@ function RegisterPage() {
           maxWidth={"xs"}
           item
           sx={{
-            bgcolor: "#fff",
+            bgcolor: "#031935",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -107,7 +107,7 @@ function RegisterPage() {
           <Grid item>
             <Typography
               variant="h5"
-              sx={{ fontWeight: "bold", color: "#3F4264" }}
+              sx={{ fontWeight: "bold", color: "#dbdbdb" }}
             >
               ویکسا
             </Typography>
@@ -121,7 +121,7 @@ function RegisterPage() {
               variant="span"
               sx={{
                 fontWeight: "bold",
-                color: "#3F4264",
+                color: "#cfcfcf",
                 fontSize: { xs: "14px", sm: "1rem" },
               }}
             >
@@ -146,14 +146,23 @@ function RegisterPage() {
           >
             <Grid
               item
+              container
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Typography variant="body2">حساب داری؟</Typography>
-              <Button onClick={() => router.push("/login")}>
+              <Typography
+                variant="body2"
+                sx={{ color: "#cfcfcf", fontSize: { xs: 12, sm: 13 } }}
+              >
+                حساب داری؟
+              </Typography>
+              <Button
+                onClick={() => router.push("/login")}
+                sx={{ fontSize: { xs: 12, sm: 13 } }}
+              >
                 برای ورود به حساب کاربری کلیک کنید
               </Button>
             </Grid>

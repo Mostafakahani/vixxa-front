@@ -1,7 +1,7 @@
 import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { CardIcon, DownloadIcon } from "../../Icons/icon";
-import ViewDetail from "../../Product/ViewDetail";
+// import ViewDetail from "../../Product/ViewDetail";
 import { useRouter } from "next/router";
 
 function Products({ items }) {
@@ -114,7 +114,8 @@ function Products({ items }) {
                     color: "#B0B1B6",
                   }}
                 >
-                  <ViewDetail html={item?.detail} />
+                  {item?.detail}
+                  {/* <ViewDetail html={item?.detail} /> */}
                 </p>
               </Grid>
               <Grid

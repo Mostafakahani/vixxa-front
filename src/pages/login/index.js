@@ -50,7 +50,11 @@ function LoginPage() {
       );
 
       if (response.status === 200) {
-        Cookies.set("token", response.data.token, { domain: ".vixxa.ir" });
+        Cookies.set(
+          "token",
+          response.data.token
+          // { domain: ".vixxa.ir" }
+        );
 
         // setCookie("token", response.data.token, 3600);
         // console.log(response.data.token);
@@ -99,7 +103,7 @@ function LoginPage() {
           maxWidth={"xs"}
           item
           sx={{
-            bgcolor: "#fff",
+            bgcolor: "#031935",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -112,7 +116,7 @@ function LoginPage() {
           <Grid item>
             <Typography
               variant="h5"
-              sx={{ fontWeight: "bold", color: "#3F4264" }}
+              sx={{ fontWeight: "bold", color: "#dbdbdb" }}
             >
               ویکسا
             </Typography>
@@ -126,7 +130,7 @@ function LoginPage() {
               variant="span"
               sx={{
                 fontWeight: "bold",
-                color: "#3F4264",
+                color: "#cfcfcf",
                 fontSize: { xs: "14px", sm: "1rem" },
               }}
             >
@@ -151,14 +155,23 @@ function LoginPage() {
           >
             <Grid
               item
+              container
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Typography variant="body2">حساب نداری؟</Typography>
-              <Button onClick={() => router.push("/register")}>
+              <Typography
+                variant="body2"
+                sx={{ color: "#cfcfcf", fontSize: { xs: 12, sm: 13 } }}
+              >
+                حساب نداری؟
+              </Typography>
+              <Button
+                onClick={() => router.push("/register")}
+                sx={{ fontSize: { xs: 12, sm: 13 } }}
+              >
                 برای ساخت حساب کاربری کلیک کنید
               </Button>
             </Grid>

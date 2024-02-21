@@ -33,7 +33,9 @@ function Register({ userData, setUserData, handleRegister, loading }) {
   return (
     <Grid item container rowSpacing={2}>
       <Grid item xs={12}>
-        <Typography sx={{ fontSize: { xs: "14px", sm: "1rem" } }}>
+        <Typography
+          sx={{ fontSize: { xs: "14px", sm: "1rem" }, color: "#cfcfcf" }}
+        >
           نام و نام خانوادگی
         </Typography>
         <TextField
@@ -44,7 +46,13 @@ function Register({ userData, setUserData, handleRegister, loading }) {
           onChange={(e) =>
             setUserData({ ...userData, fullName: e.target.value })
           }
-          InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          InputProps={{
+            sx: {
+              borderRadius: 3,
+              textAlign: "center",
+              backgroundColor: "#0B2648",
+            },
+          }}
           error={errors.fullName}
           helperText={errors.fullName ? "نام و نام خانوادگی را وارد کنید" : ""}
           autoComplete="name"
@@ -52,7 +60,9 @@ function Register({ userData, setUserData, handleRegister, loading }) {
       </Grid>
       <br />
       <Grid item xs={12}>
-        <Typography sx={{ fontSize: { xs: "14px", sm: "1rem" } }}>
+        <Typography
+          sx={{ fontSize: { xs: "14px", sm: "1rem" }, color: "#cfcfcf" }}
+        >
           ایمیل
         </Typography>
         <TextField
@@ -61,7 +71,13 @@ function Register({ userData, setUserData, handleRegister, loading }) {
           fullWidth
           value={userData.email}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-          InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          InputProps={{
+            sx: {
+              borderRadius: 3,
+              textAlign: "center",
+              backgroundColor: "#0B2648",
+            },
+          }}
           error={errors.email}
           helperText={errors.email ? "ایمیل را وارد کنید" : ""}
           autoComplete="email"
@@ -69,7 +85,9 @@ function Register({ userData, setUserData, handleRegister, loading }) {
       </Grid>
       <br />
       <Grid item xs={12}>
-        <Typography sx={{ fontSize: { xs: "14px", sm: "1rem" } }}>
+        <Typography
+          sx={{ fontSize: { xs: "14px", sm: "1rem" }, color: "#cfcfcf" }}
+        >
           رمز عبور
         </Typography>
         <TextField
@@ -80,7 +98,13 @@ function Register({ userData, setUserData, handleRegister, loading }) {
           onChange={(e) =>
             setUserData({ ...userData, password: e.target.value })
           }
-          InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          InputProps={{
+            sx: {
+              borderRadius: 3,
+              textAlign: "center",
+              backgroundColor: "#0B2648",
+            },
+          }}
           error={errors.password}
           helperText={
             errors.password ? "رمز عبور باید حداقل شش کاراکتر داشته باشد" : ""

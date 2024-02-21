@@ -1,56 +1,113 @@
-import { useState, useEffect } from "react";
-import "react-quill/dist/quill.snow.css";
-import { Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
+import { Grid, TextField } from "@mui/material";
+import dynamic from "next/dynamic"; // Import dynamic from next/dynamic
+
+// Dynamically import Editor from react-draft-wysiwyg with SSR disabled
+const DynamicEditor = dynamic(
+  () => import("react-draft-wysiwyg").then((module) => module.Editor),
+  {
+    ssr: false,
+  }
+);
 
 const CustomEditor = ({ value, onChange }) => {
-  const [text, setText] = useState(value || "");
-  const modules = {
-    toolbar: {
-      container: [
-        [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
-        [{ size: [] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        [
-          { list: "ordered" },
-          { list: "bullet" },
-          { indent: "-1" },
-          { indent: "+1" },
-        ],
-        ["link", "image", "video"],
-        ["clean"],
-        [{ align: [] }],
-      ],
-    },
-    clipboard: {
-      matchVisual: false,
-    },
-  };
+  const [editorState, setEditorState] = useState(null);
+  const [htmlValue, setHtmlValue] = useState(value);
+
   useEffect(() => {
-    setText(value || "");
+    const loadEditor = async () => {
+      const { htmlToDraft } = await import("html-to-draftjs");
+      const blocksFromHtml = htmlToDraft(value);
+      if (blocksFromHtml) {
+        const { contentBlocks, entityMap } = blocksFromHtml;
+        const contentState = ContentState.createFromBlockArray(
+          contentBlocks,
+          entityMap
+        );
+        const initialEditorState = EditorState.createWithContent(contentState);
+        setEditorState(initialEditorState);
+      }
+    };
+    loadEditor();
   }, [value]);
 
-  const handleTextChange = (value) => {
-    setText(value);
-    onChange && onChange(value);
+  const handleEditorChange = (state) => {
+    setEditorState(state);
+    const contentHtml = draftToHtml(convertToRaw(state.getCurrentContent()));
+    setHtmlValue(contentHtml);
+    onChange(contentHtml);
   };
 
-  if (typeof document !== "undefined") {
-    // In a browser environment
-    const ReactQuill = require("react-quill");
-    return (
-      <Grid container item sx={{ mb: { xs: 12, sm: 5 } }}>
-        <ReactQuill
-          modules={modules}
-          style={{ width: "100%" }}
-          theme="snow"
-          value={text}
-          onChange={handleTextChange}
+  const handleHtmlChange = (event) => {
+    const newHtmlValue = event.target.value;
+    setHtmlValue(newHtmlValue);
+    const blocksFromHtml = htmlToDraft(newHtmlValue);
+    if (blocksFromHtml) {
+      const { contentBlocks, entityMap } = blocksFromHtml;
+      const contentState = ContentState.createFromBlockArray(
+        contentBlocks,
+        entityMap
+      );
+      const newEditorState = EditorState.createWithContent(contentState);
+      setEditorState(newEditorState);
+      onChange(newHtmlValue);
+    }
+  };
+
+  return (
+    <div>
+      {editorState && (
+        <DynamicEditor
+          editorState={editorState}
+          onEditorStateChange={handleEditorChange}
+          toolbar={{
+            options: [
+              "inline",
+              "blockType",
+              "fontSize",
+              "fontFamily",
+              "list",
+              "textAlign",
+              "link",
+              "embedded",
+              "image",
+              "history",
+            ],
+          }}
+          mention={{
+            separator: " ",
+            trigger: "@",
+            suggestions: [
+              { text: "APPLE", value: "apple", url: "apple" },
+              { text: "BANANA", value: "banana", url: "banana" },
+              { text: "CHERRY", value: "cherry", url: "cherry" },
+              { text: "DURIAN", value: "durian", url: "durian" },
+              { text: "EGGFRUIT", value: "eggfruit", url: "eggfruit" },
+              { text: "FIG", value: "fig", url: "fig" },
+              { text: "GRAPEFRUIT", value: "grapefruit", url: "grapefruit" },
+              { text: "HONEYDEW", value: "honeydew", url: "honeydew" },
+            ],
+          }}
+        />
+      )}
+      <Grid container>
+        <TextField
+          id="html-editor"
+          label="HTML Editor"
+          multiline
+          rows={6}
+          fullWidth
+          variant="outlined"
+          value={htmlValue}
+          onChange={handleHtmlChange}
         />
       </Grid>
-    );
-  } else {
-    return <>ERROR</>;
-  }
+    </div>
+  );
 };
 
 export default CustomEditor;

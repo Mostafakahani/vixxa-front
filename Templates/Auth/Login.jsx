@@ -28,7 +28,9 @@ function Login({ userData, setUserData, handleLogin, loading }) {
   return (
     <Grid item container rowSpacing={2}>
       <Grid item xs={12}>
-        <Typography sx={{ fontSize: { xs: "14px", sm: "1rem" } }}>
+        <Typography
+          sx={{ fontSize: { xs: "14px", sm: "1rem" }, color: "#cfcfcf" }}
+        >
           ایمیل
         </Typography>
         <TextField
@@ -37,14 +39,22 @@ function Login({ userData, setUserData, handleLogin, loading }) {
           fullWidth
           value={userData.email}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-          InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          InputProps={{
+            sx: {
+              borderRadius: 3,
+              textAlign: "center",
+              backgroundColor: "#0B2648",
+            },
+          }}
           error={errors.email}
           helperText={errors.email ? "ایمیل را وارد کنید" : ""}
         />
       </Grid>
       <br />
       <Grid item xs={12}>
-        <Typography sx={{ fontSize: { xs: "14px", sm: "1rem" } }}>
+        <Typography
+          sx={{ fontSize: { xs: "14px", sm: "1rem" }, color: "#cfcfcf" }}
+        >
           رمز عبور
         </Typography>
         <TextField
@@ -55,7 +65,13 @@ function Login({ userData, setUserData, handleLogin, loading }) {
           onChange={(e) =>
             setUserData({ ...userData, password: e.target.value })
           }
-          InputProps={{ sx: { borderRadius: 3, textAlign: "center" } }}
+          InputProps={{
+            sx: {
+              borderRadius: 3,
+              textAlign: "center",
+              backgroundColor: "#0B2648",
+            },
+          }}
           error={errors.password}
           helperText={
             errors.password ? "رمز عبور باید حداقل شش کاراکتر داشته باشد" : ""

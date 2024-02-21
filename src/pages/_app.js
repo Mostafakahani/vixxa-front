@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }) {
         <meta name="referrer" content="origin-when-cross-origin" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="enamad" content="392013" />
-
+        <meta charset="utf-8" />
         <title>ویکسا | Vixxa</title>
       </Head>
       <Layout>
