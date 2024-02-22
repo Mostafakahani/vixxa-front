@@ -52,8 +52,8 @@ function LoginPage() {
       if (response.status === 200) {
         Cookies.set(
           "token",
-          response.data.token
-          // { domain: ".vixxa.ir" }
+          response.data.token,
+          { domain: ".vixxa.ir" }
         );
 
         // setCookie("token", response.data.token, 3600);

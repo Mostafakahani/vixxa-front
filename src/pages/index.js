@@ -1,21 +1,28 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Skeleton,
-  Stack,
-  TextField,
-} from "@mui/material";
-import { useState } from "react";
-import Products from "../../Componenets/Shop/products";
-import ShopPage from "../../Templates/Shop/Products/ShopPage";
+import { Chip, Container, Divider, Grid, Typography } from "@mui/material";
 
 export default function Home() {
   return (
     <>
       <Grid item container>
-        <ShopPage />
+        <Container disableGutters>
+          <Grid container item>
+            <Grid container item>
+              <Grid container item>
+                <Divider
+                  sx={{
+                    width: "100%",
+                    "&.MuiDivider-root": { borderColor: "red" },
+                  }}
+                >
+                  CENTER
+                </Divider>
+              </Grid>
+              <Typography variant="h1" sx={{ color: "#fff", fontWeight: 600 }}>
+                ایده بعدی خود را به راحتی و سریعتر بسازید
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>
       </Grid>
     </>
   );

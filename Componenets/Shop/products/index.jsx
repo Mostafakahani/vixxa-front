@@ -3,6 +3,7 @@ import React from "react";
 import { CardIcon, DownloadIcon } from "../../Icons/icon";
 // import ViewDetail from "../../Product/ViewDetail";
 import { useRouter } from "next/router";
+import ViewDetail from "../../Product/ViewDetail";
 
 function Products({ items }) {
   const router = useRouter();
@@ -114,8 +115,14 @@ function Products({ items }) {
                     color: "#B0B1B6",
                   }}
                 >
-                  {item?.detail}
-                  {/* <ViewDetail html={item?.detail} /> */}
+                  {/* <div
+                    style={{ width: "100%", color: "#F5F5F6" }}
+                    dangerouslySetInnerHTML={{
+                      __html: item?.detail,
+                    }}
+                  /> */}
+
+                  <ViewDetail html={item?.detail} name={item?.name} />
                 </p>
               </Grid>
               <Grid

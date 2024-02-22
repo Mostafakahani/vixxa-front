@@ -3,7 +3,7 @@ import { EditorState, convertToRaw, ContentState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
 import dynamic from "next/dynamic"; // Import dynamic from next/dynamic
-import { Grid, TextField } from "@mui/material";
+// import { Grid, TextField } from "@mui/material";
 
 const CustomEditor = ({ value, onChange }) => {
   const [editorState, setEditorState] = useState(null);
@@ -37,22 +37,22 @@ const CustomEditor = ({ value, onChange }) => {
     onChange(contentHtml);
   };
 
-  const handleHtmlChange = (event) => {
-    const newHtmlValue = event.target.value;
-    setHtmlValue(newHtmlValue);
-    const htmlToDraft = require("html-to-draftjs").default;
-    const blocksFromHtml = htmlToDraft(newHtmlValue);
-    if (blocksFromHtml) {
-      const { contentBlocks, entityMap } = blocksFromHtml;
-      const contentState = ContentState.createFromBlockArray(
-        contentBlocks,
-        entityMap
-      );
-      const newEditorState = EditorState.createWithContent(contentState);
-      setEditorState(newEditorState);
-      onChange(newHtmlValue);
-    }
-  };
+  // const handleHtmlChange = (event) => {
+  //   const newHtmlValue = event.target.value;
+  //   setHtmlValue(newHtmlValue);
+  //   const htmlToDraft = require("html-to-draftjs").default;
+  //   const blocksFromHtml = htmlToDraft(newHtmlValue);
+  //   if (blocksFromHtml) {
+  //     const { contentBlocks, entityMap } = blocksFromHtml;
+  //     const contentState = ContentState.createFromBlockArray(
+  //       contentBlocks,
+  //       entityMap
+  //     );
+  //     const newEditorState = EditorState.createWithContent(contentState);
+  //     setEditorState(newEditorState);
+  //     onChange(newHtmlValue);
+  //   }
+  // };
 
   return (
     <div>
@@ -90,7 +90,7 @@ const CustomEditor = ({ value, onChange }) => {
           }}
         />
       )}
-      <Grid container>
+      {/* <Grid container>
         <TextField
           id="html-editor"
           label="HTML Editor"
@@ -104,7 +104,7 @@ const CustomEditor = ({ value, onChange }) => {
             style: { direction: "ltr", fontFamily: "Gilroy" },
           }}
         />
-      </Grid>
+      </Grid> */}
     </div>
   );
 };
