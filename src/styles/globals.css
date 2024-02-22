@@ -82,19 +82,18 @@
   direction: rtl;
   user-select: none !important;
   text-decoration-line: none !important;
-  font-family: 'modam' !important;
+  /* font-family: "modam"; */
 }
 
 /* Apply font families */
 body {
-  font-family: 'modam', 'Gilroy', sans-serif;
+  /* font-family: "modam", "Gilroy", sans-serif; */
   /* Default font for Persian text */
+  /* font-family: "modam", "Gilroy", sans-serif; */
   background-color: #041121 !important;
 }
 
 /* Select English text */
-
-
 
 /* body {
   background-color: #041121 !important;
@@ -115,7 +114,7 @@ body {
 .ql-list,
 .ql-container,
 .ql-snow,
-.ql-editor>*,
+.ql-editor > *,
 .ql-blank,
 .ql-clipboard,
 .ql-tooltip,
@@ -127,7 +126,6 @@ ul,
 li {
   direction: ltr !important;
 }
-
 
 /* react-quill-styles.css */
 
@@ -173,6 +171,7 @@ li {
 .ql-color-info {
   color: #17a2b8;
 }
+
 
 /* .editorr > *{
   direction: ltr !important;

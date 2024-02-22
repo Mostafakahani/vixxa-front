@@ -2,17 +2,8 @@ import React, { useEffect, useState } from "react";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
-import { Grid, TextField } from "@mui/material";
 import dynamic from "next/dynamic"; // Import dynamic from next/dynamic
-
-// Dynamically import Editor from react-draft-wysiwyg with SSR disabled
-const DynamicEditor = dynamic(
-  () => import("react-draft-wysiwyg").then((module) => module.Editor),
-  {
-    ssr: false,
-  }
-);
+import { Grid, TextField } from "@mui/material";
 
 const CustomEditor = ({ value, onChange }) => {
   const [editorState, setEditorState] = useState(null);
@@ -20,7 +11,7 @@ const CustomEditor = ({ value, onChange }) => {
 
   useEffect(() => {
     const loadEditor = async () => {
-      const { htmlToDraft } = await import("html-to-draftjs");
+      const htmlToDraft = (await import("html-to-draftjs")).default;
       const blocksFromHtml = htmlToDraft(value);
       if (blocksFromHtml) {
         const { contentBlocks, entityMap } = blocksFromHtml;
@@ -35,6 +26,10 @@ const CustomEditor = ({ value, onChange }) => {
     loadEditor();
   }, [value]);
 
+  const DynamicEditor = dynamic(() =>
+    import("react-draft-wysiwyg").then((module) => module.Editor)
+  );
+
   const handleEditorChange = (state) => {
     setEditorState(state);
     const contentHtml = draftToHtml(convertToRaw(state.getCurrentContent()));
@@ -45,6 +40,7 @@ const CustomEditor = ({ value, onChange }) => {
   const handleHtmlChange = (event) => {
     const newHtmlValue = event.target.value;
     setHtmlValue(newHtmlValue);
+    const htmlToDraft = require("html-to-draftjs").default;
     const blocksFromHtml = htmlToDraft(newHtmlValue);
     if (blocksFromHtml) {
       const { contentBlocks, entityMap } = blocksFromHtml;
@@ -104,6 +100,9 @@ const CustomEditor = ({ value, onChange }) => {
           variant="outlined"
           value={htmlValue}
           onChange={handleHtmlChange}
+          inputProps={{
+            style: { direction: "ltr", fontFamily: "Gilroy" },
+          }}
         />
       </Grid>
     </div>
