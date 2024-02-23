@@ -7,10 +7,11 @@ import { Server } from "../../config";
 
 const Callback = () => {
   const router = useRouter();
+  const { Authority, Status } = router.query;
 
   const verifyPayment = async () => {
     try {
-      const { Authority, Status } = router.query;  
+      console.log(Authority, Status);
       if (!Authority || !Status) {
         console.error("Invalid parameters.");
         return;
@@ -20,14 +21,20 @@ const Callback = () => {
         console.error("Payment verification failed or canceled by user.");
         return;
       }
- 
+
       // Replace 'YOUR_MERCHANT_ID' with your actual ZarinPal merchant ID
       const merchantId = "2611112f-e4eb-455b-bd53-fdcaa5f39322";
 
-      const response = await axios.post( 
+      const response = await axios.post(
         `${Server.URL}/pey/verify/${Authority}`,
         {
           authority: Authority,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
 
@@ -48,9 +55,14 @@ const Callback = () => {
 
   useEffect(() => {
     verifyPayment();
-  }, []); // Run once on component mount
+  }, [router.query]); // Run once on component mount
 
-  return <div>Processing payment...</div>;
+  return (
+    <div>
+      Processing payment...
+      <button onClick={verifyPayment}>verifyPayment</button>
+    </div>
+  );
 };
 
 export default Callback;
