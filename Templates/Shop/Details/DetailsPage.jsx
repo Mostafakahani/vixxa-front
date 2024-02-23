@@ -95,7 +95,7 @@ function DetailsItemPage({ data }) {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container item display={"flex"} justifyContent={"center"}>
+          <Grid container item display={"flex"} justifyContent={"center"} my={5}>
             <Grid
               container
               item

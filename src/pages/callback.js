@@ -2,24 +2,22 @@
 
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Server } from "../../config";
 
 const Callback = () => {
   const router = useRouter();
   const { Authority, Status } = router.query;
+  const [errorMessage, setErrorMessage] = useState("");
 
   const verifyPayment = async () => {
     try {
-      console.log(Authority, Status);
       if (!Authority || !Status) {
-        console.error("Invalid parameters.");
-        return;
+        throw new Error("Query parameters missing.");
       }
 
-      if (Status !== "OK") {
-        console.error("Payment verification failed or canceled by user.");
-        return;
+      if (Status === "NOK") {
+        throw new Error("Payment verification failed or canceled by user.");
       }
 
       const response = await axios.post(
@@ -39,24 +37,25 @@ const Callback = () => {
         console.log("Payment verified successfully.");
         console.log("Reference ID:", response.data.data.ref_id);
       } else {
-        console.error(
-          "Payment verification failed:",
-          response.data.data.message
-        );
+        throw new Error(response.data.data.message);
       }
     } catch (error) {
-      console.error("Error verifying payment:", error);
+      console.error("Error verifying payment:", error.message);
+      setErrorMessage("خطایی در تایید پرداخت رخ داده است.");
     }
   };
 
   useEffect(() => {
     verifyPayment();
-  }, [router.query]); 
+  }, [Authority, Status]);
 
   return (
-    <div>
-      Processing payment...
-      <button onClick={verifyPayment}>verifyPayment</button>
+    <div style={{ height: "100vh" }}>
+      {errorMessage ? (
+        <h3 style={{ color: "#fff" }}>{errorMessage}</h3>
+      ) : (
+        <div>Processing payment...</div>
+      )}
     </div>
   );
 };

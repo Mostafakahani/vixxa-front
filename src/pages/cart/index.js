@@ -1,14 +1,32 @@
-import { Container } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import BasketPage from "../../../Templates/Shop/Basket/BasketPage";
 import axios from "axios";
 import { Server } from "../../../config";
 import ProductsInBasket from "../../../Componenets/Shop/productsInBasket/ProductsInBasket";
+import { toast } from "react-toastify";
 
 function CartPage() {
   const [basket, setBasket] = useState([]);
 
-  // این تابع برای دریافت لیست سبد خرید از سرور استفاده می‌شود
+  const peymentGatway = async () => {
+    try {
+      const response = await axios.post(
+        `${Server.URL}/pey/payment`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status == 200) {
+        window.location.href = response.data.url;
+      } else {
+        toast.error("لحظاتی بعد مجدد تلاش کنید.");
+      }
+    } catch (error) {
+      console.error("Error adding to basket:", error);
+    }
+  };
   const fetchBasket = async () => {
     try {
       const response = await axios.post(
@@ -58,14 +76,45 @@ function CartPage() {
     fetchBasket();
   }, []);
   return (
-    <Container>
-      <ProductsInBasket items={basket} removeFromBasket={removeFromBasket} />
-      {/* <BasketPage
-        data={basket}
-        addToBasket={addToBasket}
-        removeFromBasket={removeFromBasket}
-      /> */}
-    </Container>
+    <Grid container rowSpacing={2}>
+      <Grid container item xs={12}>
+        <ProductsInBasket items={basket} removeFromBasket={removeFromBasket} />
+      </Grid>
+      <Grid container item display={"flex"} justifyContent={"flex-end"} xs={12}>
+        <Grid
+          container
+          item
+          display={"flex"}
+          justifyContent={"flex-end"}
+          xs={12}
+          sm={4}
+          md={2}
+        >
+          <Button
+            variant="contained"
+            disableElevation
+            fullWidth
+            sx={{
+              backgroundColor: "#5C7CFF",
+              borderRadius: 3,
+              //   boxShadow: "0px 7px 20px -5px #4469ff",
+              fontSize: 13,
+              px: 2,
+              py: 1,
+              transition: "0.2s",
+              "&:hover": {
+                backgroundColor: "#5c7cffde",
+                // boxShadow: "0px 7px 20px -5px #5c7cffde",
+                transform: "translateY(-5px)",
+              },
+            }}
+            onClick={() => peymentGatway()}
+          >
+            پرداخت
+          </Button>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 
