@@ -288,7 +288,10 @@ function Header() {
               fullWidth
               key={index}
               startIcon={item.icon}
-              href={item.url}
+              onClick={() => {
+                router.push(item.url);
+                handleDrawerClose();
+              }}
               sx={{
                 textTransform: "none",
                 display: "flex",
