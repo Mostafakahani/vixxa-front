@@ -22,9 +22,6 @@ const Callback = () => {
         return;
       }
 
-      // Replace 'YOUR_MERCHANT_ID' with your actual ZarinPal merchant ID
-      const merchantId = "2611112f-e4eb-455b-bd53-fdcaa5f39322";
-
       const response = await axios.post(
         `${Server.URL}/pey/verify/${Authority}`,
         {
@@ -41,7 +38,6 @@ const Callback = () => {
       if (response.data.data.code === 100) {
         console.log("Payment verified successfully.");
         console.log("Reference ID:", response.data.data.ref_id);
-        // Do any further processing here if needed
       } else {
         console.error(
           "Payment verification failed:",
@@ -55,7 +51,7 @@ const Callback = () => {
 
   useEffect(() => {
     verifyPayment();
-  }, [router.query]); // Run once on component mount
+  }, [router.query]); 
 
   return (
     <div>

@@ -1,5 +1,6 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { CardIcon } from "../../../Componenets/Icons/icon";
+import { addToBasket } from "../../../utils/addToBasket";
 
 function DetailsItemPage({ data }) {
   return (
@@ -41,6 +42,7 @@ function DetailsItemPage({ data }) {
                     disableElevation
                     fullWidth
                     variant="contained"
+                    onClick={() => addToBasket(data?.product._id)}
                     sx={{
                       backgroundColor: "#5C7CFF",
                       borderRadius: 3,

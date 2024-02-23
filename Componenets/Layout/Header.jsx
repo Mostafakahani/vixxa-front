@@ -142,7 +142,7 @@ function Header() {
             }}
           >
             <Grid item>
-              <IconButton size="large">
+              <IconButton size="large" onClick={() => router.push("/cart")}>
                 <BasketIcon sx={{ color: "#FFFFFF" }} />
               </IconButton>
             </Grid>

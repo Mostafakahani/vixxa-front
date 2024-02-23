@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios"; // Import Axios
 import Login from "../../../Templates/Auth/Login";
 import { toast } from "react-toastify";
-import { Server } from "../../../config";
+import { Server, ServerDeveloperMode } from "../../../config";
 import { getCookie, setCookie } from "../../../Cookie";
 import { token } from "stylis";
 import { useRouter } from "next/router";
@@ -50,12 +50,11 @@ function LoginPage() {
       );
 
       if (response.status === 200) {
-        Cookies.set(
-          "token",
-          response.data.token,
-          { domain: ".vixxa.ir" }
-        );
-
+        if (ServerDeveloperMode) {
+          Cookies.set("token", response.data.token);
+        } else {
+          Cookies.set("token", response.data.token, { domain: ".vixxa.ir" });
+        }
         // setCookie("token", response.data.token, 3600);
         // console.log(response.data.token);
         toast.success("با موفقیت وارد شدید");

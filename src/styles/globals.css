@@ -172,7 +172,35 @@ li {
   color: #17a2b8;
 }
 
+/* Define scrollbar styles */
+::-webkit-scrollbar {
+  width: 5px; /* Width of the entire scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0d2647; /* Color of the tracking area */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #031935; /* Color of the scroll thumb */
+  border-radius: 6px; /* Roundness of the scroll thumb */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0d2647; /* Color of the scroll thumb on hover */
+}
 
 /* .editorr > *{
   direction: ltr !important;
 } */
+.Toastify__toast {
+  font-family: "modam" !important;
+  font-size: 14px;
+}
+.Toastify__toast-theme--light {
+  background: #031935 !important;
+  color: #ffffff !important;
+}

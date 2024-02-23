@@ -29,10 +29,7 @@ export default function App({ Component, pageProps }) {
   }, []);
   const theme = createTheme({
     typography: {
-      fontFamily: [
-       "modam",
-       "Gilroy"
-      ].join(","),
+      fontFamily: ["modam", "Gilroy"].join(","),
     },
   });
   if (isLoading) {
@@ -66,7 +63,7 @@ export default function App({ Component, pageProps }) {
           <title>ویکسا | Vixxa</title>
         </Head>
         <Layout>
-          <ToastContainer closeOnClick rtl />
+          <ToastContainer theme="dark" closeOnClick rtl />
           <CssBaseline />
           <Component {...pageProps} />
         </Layout>
