@@ -53,7 +53,7 @@ function LoginPage() {
         Cookies.set(
           "token",
           response.data.token,
-          { domain: ".vixxa.ir" }
+          // { domain: ".vixxa.ir" }
         );
 
         // setCookie("token", response.data.token, 3600);
