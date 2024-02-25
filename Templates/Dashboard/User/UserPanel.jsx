@@ -1,0 +1,171 @@
+import { Button, Container, Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
+import Table from "../../../Componenets/Dashboard/Tables/Table";
+function UserPanel() {
+  const [selected, setSelected] = useState([]);
+  const dataHead = [
+    // "کد محصول",
+    "نام محصول",
+    "مبلغ",
+    "دسته بندی",
+    "دریافت محصول",
+  ];
+  const dataBody = [
+    {
+      id: 1,
+      data: [
+        // "#254",
+        {
+          type: "text",
+          text: "Tailwind css KeyUi Design",
+        },
+        {
+          type: "textBold",
+          text: "10000 تومان",
+        },
+        {
+          type: "text",
+          text: "Componenets",
+        },
+        {
+          type: "btn",
+          text: "Componenets",
+        },
+      ],
+    },
+    {
+      id: 2,
+      data: [
+        // "#254",
+        {
+          type: "text",
+          text: "Tailwind css KeyUi Design",
+        },
+        {
+          type: "textBold",
+          text: "10000 تومان",
+        },
+        {
+          type: "text",
+          text: "Componenets",
+        },
+        {
+          type: "btn",
+          text: "Componenets",
+        },
+      ],
+    },
+    {
+      id: 3,
+      data: [
+        // "#254",
+        {
+          type: "text",
+          text: "Tailwind css KeyUi Design",
+        },
+        {
+          type: "textBold",
+          text: "10000 تومان",
+        },
+        {
+          type: "text",
+          text: "Componenets",
+        },
+        {
+          type: "btn",
+          text: "Componenets",
+        },
+      ],
+    },
+  ];
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  return (
+    <>
+      <Grid container item rowSpacing={3} sx={{ height: "max-content" }}>
+        <Grid container item>
+          <Grid container item>
+            <Grid
+              item
+              xs={6}
+              sm={4}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              <Button>مشاهده سفارشات</Button>
+            </Grid>
+            <Grid
+              item
+              sm={4}
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="h5" sx={{ color: "#fff" }}>
+                لیست سفارشات
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={6}
+              sm={4}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <Button color="error">خروج از حساب</Button>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: { xs: "flex", sm: "none" },
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="h5" sx={{ color: "#fff" }}>
+                لیست سفارشات
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container item>
+          <Container
+            maxWidth="md"
+            sx={{ bgcolor: "#031935", borderRadius: 3, p: 2 }}
+          >
+            <Grid container rowSpacing={1}>
+              <Grid container item xs={12}>
+                <Typography
+                  sx={{ fontSize: 13, fontWeight: 200, color: "#fff" }}
+                >
+                  تعداد کل سفارشات خریداری شده: 55 مورد یافت شد.
+                </Typography>
+              </Grid>
+              <Grid container item xs={12}>
+                <Table
+                  selected={selected}
+                  setSelected={setSelected}
+                  dataHead={dataHead}
+                  dataBody={dataBody}
+                  // show={(x) => console.log(dataBody.data[0])}
+                  selectedItemId={selectedItemId}
+                />
+              </Grid>
+            </Grid>
+          </Container>
+        </Grid>
+      </Grid>
+    </>
+  );
+}
+
+export default UserPanel;

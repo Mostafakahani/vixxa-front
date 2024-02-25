@@ -18,11 +18,13 @@ const Callback = () => {
       }
 
       if (Status === "NOK") {
+        setLoading(false);
         setErrorMessage("تایید پرداخت ناموفق یا توسط کاربر لغو شده است.");
         return;
       }
 
       if (Status === "OK") {
+        setLoading(false);
         setErrorMessage("پرداخت با موفقیت تایید شد.");
       }
 
@@ -52,7 +54,7 @@ const Callback = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       verifyPayment();
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [Authority, Status]);

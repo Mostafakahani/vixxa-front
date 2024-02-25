@@ -114,7 +114,7 @@ body {
 .ql-list,
 .ql-container,
 .ql-snow,
-.ql-editor > *,
+.ql-editor>*,
 .ql-blank,
 .ql-clipboard,
 .ql-tooltip,
@@ -172,25 +172,62 @@ li {
   color: #17a2b8;
 }
 
+
+
+/* width */
+.table-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 4px;
+}
+
+/* Track */
+.table-scroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* Handle */
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: #021e3f;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* Handle on hover */
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #011227;
+}
+
 /* Define scrollbar styles */
 ::-webkit-scrollbar {
-  width: 5px; /* Width of the entire scrollbar */
+  width: 5px;
+  /* Width of the entire scrollbar */
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #0d2647; /* Color of the tracking area */
+  background: #031935;
+  /* Color of the tracking area */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #031935; /* Color of the scroll thumb */
-  border-radius: 6px; /* Roundness of the scroll thumb */
+  background: #031935;
+  /* Color of the scroll thumb */
+  border-radius: 6px;
+  /* Roundness of the scroll thumb */
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d2647; /* Color of the scroll thumb on hover */
+  background: #0d2647;
+  /* Color of the scroll thumb on hover */
 }
 
 /* .editorr > *{
@@ -200,7 +237,114 @@ li {
   font-family: "modam" !important;
   font-size: 14px;
 }
+
 .Toastify__toast-theme--light {
   background: #031935 !important;
   color: #ffffff !important;
 }
+
+
+
+
+.title-section {
+  color: #272727;
+  font-size: 17.66px;
+  font-weight: 600;
+  font-family: "rokh" !important;
+}
+
+.section {
+  padding: 30px 20px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 17px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 33px;
+  padding-right: 33px;
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@keyframes head-blogs {
+  0% {
+    opacity: 0.8;
+  }
+
+  10% {
+    opacity: 1;
+  }
+}
+
+/* 
+.full-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-end {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.center-start {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.center-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.fit-content {
+  width: fit-content;
+}
+
+.MuiStepLabel-root.MuiStepLabel-horizontal.MuiStepLabel-alternativeLabel.muirtl-9tyx11-MuiStepLabel-root:first-child {
+  display: none;
+}
+
+.sigCanvas {
+  background-color: #111315;
+  margin-top: "10px";
+} */
