@@ -1,60 +1,77 @@
-// pages/callback.js
-
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Server } from "../../config";
+import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
 
 const Callback = () => {
   const router = useRouter();
   const { Authority, Status } = router.query;
+  const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const verifyPayment = async () => {
     try {
       if (!Authority || !Status) {
-        throw new Error("Query parameters missing.");
+        throw new Error("پارامترهای درخواست موجود نیستند.");
       }
 
       if (Status === "NOK") {
-        throw new Error("Payment verification failed or canceled by user.");
+        setErrorMessage("تایید پرداخت ناموفق یا توسط کاربر لغو شده است.");
+        return;
+      }
+
+      if (Status === "OK") {
+        setErrorMessage("پرداخت با موفقیت تایید شد.");
       }
 
       const response = await axios.post(
         `${Server.URL}/pey/verify/${Authority}`,
-        {
-          authority: Authority,
-        },
+        { authority: Authority },
         {
           withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       );
 
-      if (response.data.data.code === 100) {
-        console.log("Payment verified successfully.");
-        console.log("Reference ID:", response.data.data.ref_id);
+      if (response.status === 200) {
+        setLoading(false);
+        toast.success("پرداخت با موفقیت تایید شد.");
+        setErrorMessage("پرداخت با موفقیت تایید شد.");
+        router.push("/dashboard/user");
       } else {
         throw new Error(response.data.data.message);
       }
     } catch (error) {
-      console.error("Error verifying payment:", error.message);
-      setErrorMessage("خطایی در تایید پرداخت رخ داده است.");
+      setLoading(false);
+      setErrorMessage(error.message);
     }
   };
 
   useEffect(() => {
-    verifyPayment();
+    const timer = setTimeout(() => {
+      verifyPayment();
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [Authority, Status]);
 
   return (
-    <div style={{ height: "100vh" }}>
-      {errorMessage ? (
-        <h3 style={{ color: "#fff" }}>{errorMessage}</h3>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {loading ? (
+        <CircularProgress />
       ) : (
-        <div>Processing payment...</div>
+        <h3 style={{ color: "#fff" }}>
+          {errorMessage || "در حال پردازش پرداخت..."}
+        </h3>
       )}
     </div>
   );
