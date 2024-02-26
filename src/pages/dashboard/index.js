@@ -37,7 +37,7 @@ export async function getServerSideProps(context) {
       // اگر کاربر ادمین نبود، به صفحه کاربران عادی ریدایرکت می‌شود
       return {
         redirect: {
-          destination: "/dashboard/user",
+          destination: "/dashboard/user/panel",
           permanent: false,
         },
       };

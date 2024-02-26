@@ -24,6 +24,7 @@ function CartPage() {
         toast.error("لحظاتی بعد مجدد تلاش کنید.");
       }
     } catch (error) {
+      toast.warning(error?.response?.data?.message);
       console.error("Error adding to basket:", error);
     }
   };
@@ -81,38 +82,40 @@ function CartPage() {
         <ProductsInBasket items={basket} removeFromBasket={removeFromBasket} />
       </Grid>
       <Grid container item display={"flex"} justifyContent={"flex-end"} xs={12}>
-        <Grid
-          container
-          item
-          display={"flex"}
-          justifyContent={"flex-end"}
-          xs={12}
-          sm={4}
-          md={2}
-        >
-          <Button
-            variant="contained"
-            disableElevation
-            fullWidth
-            sx={{
-              backgroundColor: "#5C7CFF",
-              borderRadius: 3,
-              //   boxShadow: "0px 7px 20px -5px #4469ff",
-              fontSize: 13,
-              px: 2,
-              py: 1,
-              transition: "0.2s",
-              "&:hover": {
-                backgroundColor: "#5c7cffde",
-                // boxShadow: "0px 7px 20px -5px #5c7cffde",
-                transform: "translateY(-5px)",
-              },
-            }}
-            onClick={() => peymentGatway()}
+        {basket?.length !== 0 && (
+          <Grid
+            container
+            item
+            display={"flex"}
+            justifyContent={"flex-end"}
+            xs={12}
+            sm={4}
+            md={2}
           >
-            پرداخت
-          </Button>
-        </Grid>
+            <Button
+              variant="contained"
+              disableElevation
+              fullWidth
+              sx={{
+                backgroundColor: "#5C7CFF",
+                borderRadius: 3,
+                //   boxShadow: "0px 7px 20px -5px #4469ff",
+                fontSize: 13,
+                px: 2,
+                py: 1,
+                transition: "0.2s",
+                "&:hover": {
+                  backgroundColor: "#5c7cffde",
+                  // boxShadow: "0px 7px 20px -5px #5c7cffde",
+                  transform: "translateY(-5px)",
+                },
+              }}
+              onClick={() => peymentGatway()}
+            >
+              پرداخت
+            </Button>
+          </Grid>
+        )}
       </Grid>
     </Grid>
   );

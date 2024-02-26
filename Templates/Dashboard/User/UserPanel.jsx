@@ -1,8 +1,12 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../../Componenets/Dashboard/Tables/Table";
+import axios from "axios";
+import { Server } from "../../../config";
 function UserPanel() {
   const [selected, setSelected] = useState([]);
+  const [dataBody, setDataBody] = useState([]);
+  // const [dataHead, setDataHead] = useState([]);
   const dataHead = [
     // "کد محصول",
     "نام محصول",
@@ -10,74 +14,117 @@ function UserPanel() {
     "دسته بندی",
     "دریافت محصول",
   ];
-  const dataBody = [
-    {
-      id: 1,
-      data: [
-        // "#254",
-        {
-          type: "text",
-          text: "Tailwind css KeyUi Design",
-        },
-        {
-          type: "textBold",
-          text: "10000 تومان",
-        },
-        {
-          type: "text",
-          text: "Componenets",
-        },
-        {
-          type: "btn",
-          text: "Componenets",
-        },
-      ],
-    },
-    {
-      id: 2,
-      data: [
-        // "#254",
-        {
-          type: "text",
-          text: "Tailwind css KeyUi Design",
-        },
-        {
-          type: "textBold",
-          text: "10000 تومان",
-        },
-        {
-          type: "text",
-          text: "Componenets",
-        },
-        {
-          type: "btn",
-          text: "Componenets",
-        },
-      ],
-    },
-    {
-      id: 3,
-      data: [
-        // "#254",
-        {
-          type: "text",
-          text: "Tailwind css KeyUi Design",
-        },
-        {
-          type: "textBold",
-          text: "10000 تومان",
-        },
-        {
-          type: "text",
-          text: "Componenets",
-        },
-        {
-          type: "btn",
-          text: "Componenets",
-        },
-      ],
-    },
-  ];
+  // const dataBody = [
+  //   {
+  //     id: 1,
+  //     data: [
+  //       // "#254",
+  //       {
+  //         type: "text",
+  //         text: "Tailwind css KeyUi Design",
+  //       },
+  //       {
+  //         type: "textBold",
+  //         text: "10000 تومان",
+  //       },
+  //       {
+  //         type: "text",
+  //         text: "Componenets",
+  //       },
+  //       {
+  //         type: "btn",
+  //         text: "Componenets",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     data: [
+  //       // "#254",
+  //       {
+  //         type: "text",
+  //         text: "Tailwind css KeyUi Design",
+  //       },
+  //       {
+  //         type: "textBold",
+  //         text: "10000 تومان",
+  //       },
+  //       {
+  //         type: "text",
+  //         text: "Componenets",
+  //       },
+  //       {
+  //         type: "btn",
+  //         text: "Componenets",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 3,
+  //     data: [
+  //       // "#254",
+  //       {
+  //         type: "text",
+  //         text: "Tailwind css KeyUi Design",
+  //       },
+  //       {
+  //         type: "textBold",
+  //         text: "10000 تومان",
+  //       },
+  //       {
+  //         type: "text",
+  //         text: "Componenets",
+  //       },
+  //       {
+  //         type: "btn",
+  //         text: "Componenets",
+  //       },
+  //     ],
+  //   },
+  // ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${Server.URL}/user/profile`, {
+          withCredentials: true,
+        });
+
+        const apiData = response.data.purchasedProducts;
+        const updatedData = apiData.map((item, index) => {
+          return {
+            id: index,
+            data: [
+              // `#${item?.id}`,
+              {
+                type: "text",
+                text: item?.name,
+              },
+              {
+                type: "text",
+                text: item?.price || null,
+              },
+              {
+                type: "text",
+                text: item?.category,
+                // value: item?.title,
+              },
+              {
+                type: "btn",
+                text: item?.id,
+                // value: item?.title,
+              },
+            ],
+          };
+        });
+        setSelected([]);
+        setDataBody(updatedData);
+      } catch (error) {
+        console.error("Error fetching data from the server:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const [selectedItemId, setSelectedItemId] = useState(null);
 
   return (

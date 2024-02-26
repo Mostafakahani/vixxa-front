@@ -41,7 +41,7 @@ const Callback = () => {
         setLoading(false);
         toast.success("پرداخت با موفقیت تایید شد.");
         setErrorMessage("پرداخت با موفقیت تایید شد.");
-        router.push("/dashboard/user");
+        router.push("/dashboard/user/panel");
       } else {
         throw new Error(response.data.data.message);
       }

@@ -9,10 +9,20 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
-import { Avatar, Button, Grid, SvgIcon, TextField } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  CircularProgress,
+  Grid,
+  SvgIcon,
+  TextField,
+} from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
+import { Server } from "../../../config";
+import { toast } from "react-toastify";
 
 function EnhancedTableHead(props) {
   const { onSelectAllClick, numSelected, rowCount, dataHead, selected } = props;
@@ -96,7 +106,31 @@ export default function TableItems({
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
-
+  const [loading, setLoading] = useState(dataBody.length > 0);
+  const [buttonData, setButtonData] = useState(null);
+  const handleButtonData = async (data) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${Server.URL}/purchase/generate/` + data,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setLoading(false);
+        toast.success("Ready to Download");
+      } else {
+        setLoading(false);
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+    setButtonData(data);
+  };
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -203,7 +237,7 @@ export default function TableItems({
           stickyHeader
           aria-label="sticky table"
           sx={{
-            borderRadius: "8px",
+            borderRadius: "10px",
             overflow: "hidden",
             minWidth: 700,
             "td,tr": {
@@ -349,8 +383,15 @@ export default function TableItems({
                         )}
                         {e?.type === "btn" && (
                           <>
+                            {/* <Grid
+                              item
+                              display={"flex"}
+                              alignItems={"center"}
+                              justifyContent={"center"}
+                            > */}
                             <Button
                               variant="contained"
+                              disabled={loading}
                               sx={{
                                 bgcolor: "transparent",
                                 color: "#28D219",
@@ -359,10 +400,15 @@ export default function TableItems({
                                   bgcolor: "#6fe7510f",
                                 },
                               }}
+                              onClick={() => handleButtonData(e?.text)}
                               disableElevation
                             >
-                              دریافت فایل
+                              {loading && (
+                                <CircularProgress sx={{ color: "#28D219" }} />
+                              )}
+                              {!loading && "دریافت فایل"}
                             </Button>
+                            {/* </Grid> */}
                           </>
                         )}
 

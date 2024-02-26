@@ -56,8 +56,9 @@ function Header() {
     setAnchorElUser(event.currentTarget);
   };
   const logOut = () => {
-    Cookies.remove("token");
-
+    if (getCookie("token")) {
+      Cookies.remove("token");
+    }
     router.push("/login");
   };
   const handleCloseUserMenu = () => {
