@@ -103,34 +103,12 @@ export default function TableItems({
   dataBody,
   setSelected = false,
   selected = false,
+  handleButtonData,
+  loading,buttonData,buttonLink
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
-  const [loading, setLoading] = useState(dataBody.length > 0);
-  const [buttonData, setButtonData] = useState(null);
-  const handleButtonData = async (data) => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `${Server.URL}/purchase/generate/` + data,
-        {
-          withCredentials: true,
-        }
-      );
-      if (response.status === 200) {
-        setLoading(false);
-        toast.success("Ready to Download");
-      } else {
-        setLoading(false);
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    } finally {
-      setLoading(false);
-    }
-    setButtonData(data);
-  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -383,12 +361,6 @@ export default function TableItems({
                         )}
                         {e?.type === "btn" && (
                           <>
-                            {/* <Grid
-                              item
-                              display={"flex"}
-                              alignItems={"center"}
-                              justifyContent={"center"}
-                            > */}
                             <Button
                               variant="contained"
                               disabled={loading}
@@ -406,33 +378,17 @@ export default function TableItems({
                               {loading && (
                                 <CircularProgress sx={{ color: "#28D219" }} />
                               )}
-                              {!loading && "دریافت فایل"}
+                              {!loading && (
+                                <>
+                                  {!buttonLink && "دریافت فایل"}
+                                  {buttonLink && "دانلود"}
+                                </>
+                              )}
                             </Button>
-                            {/* </Grid> */}
                           </>
                         )}
 
-                        {e?.type === "input" && (
-                          <>
-                            <Grid
-                              sx={{ display: "flex", justifyContent: "center" }}
-                            >
-                              <TextField
-                                size="small"
-                                placeholder="120 دلار"
-                                fullWidth
-                                InputProps={{
-                                  inputProps: {
-                                    sx: {
-                                      borderRadius: "8px",
-                                      textAlign: "center",
-                                    },
-                                  },
-                                }}
-                              />
-                            </Grid>
-                          </>
-                        )}
+                        
                       </TableCell>
                     ))}
                   </TableRow>

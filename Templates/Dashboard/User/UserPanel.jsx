@@ -3,85 +3,17 @@ import React, { useEffect, useState } from "react";
 import Table from "../../../Componenets/Dashboard/Tables/Table";
 import axios from "axios";
 import { Server } from "../../../config";
+import { toast } from "react-toastify";
+
 function UserPanel() {
   const [selected, setSelected] = useState([]);
   const [dataBody, setDataBody] = useState([]);
-  // const [dataHead, setDataHead] = useState([]);
-  const dataHead = [
-    // "کد محصول",
-    "نام محصول",
-    "مبلغ",
-    "دسته بندی",
-    "دریافت محصول",
-  ];
-  // const dataBody = [
-  //   {
-  //     id: 1,
-  //     data: [
-  //       // "#254",
-  //       {
-  //         type: "text",
-  //         text: "Tailwind css KeyUi Design",
-  //       },
-  //       {
-  //         type: "textBold",
-  //         text: "10000 تومان",
-  //       },
-  //       {
-  //         type: "text",
-  //         text: "Componenets",
-  //       },
-  //       {
-  //         type: "btn",
-  //         text: "Componenets",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     data: [
-  //       // "#254",
-  //       {
-  //         type: "text",
-  //         text: "Tailwind css KeyUi Design",
-  //       },
-  //       {
-  //         type: "textBold",
-  //         text: "10000 تومان",
-  //       },
-  //       {
-  //         type: "text",
-  //         text: "Componenets",
-  //       },
-  //       {
-  //         type: "btn",
-  //         text: "Componenets",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     data: [
-  //       // "#254",
-  //       {
-  //         type: "text",
-  //         text: "Tailwind css KeyUi Design",
-  //       },
-  //       {
-  //         type: "textBold",
-  //         text: "10000 تومان",
-  //       },
-  //       {
-  //         type: "text",
-  //         text: "Componenets",
-  //       },
-  //       {
-  //         type: "btn",
-  //         text: "Componenets",
-  //       },
-  //     ],
-  //   },
-  // ];
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [loading, setLoading] = useState(dataBody.length > 0);
+  const [buttonData, setButtonData] = useState(null);
+  const [buttonLink, setButtonLink] = useState(null);
+  const dataHead = ["نام محصول", "مبلغ", "دسته بندی", "دریافت محصول"];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -106,12 +38,10 @@ function UserPanel() {
               {
                 type: "text",
                 text: item?.category,
-                // value: item?.title,
               },
               {
                 type: "btn",
                 text: item?.id,
-                // value: item?.title,
               },
             ],
           };
@@ -125,8 +55,32 @@ function UserPanel() {
 
     fetchData();
   }, []);
-  const [selectedItemId, setSelectedItemId] = useState(null);
 
+  const handleButtonData = async (data) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${Server.URL}/image/get-signed/`,
+        { name: data },
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setLoading(false);
+        setButtonLink(response.data);
+        toast.success("Ready to Download");
+      } else {
+        setLoading(false);
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+    setButtonData(data);
+  };
   return (
     <>
       <Grid container item rowSpacing={3} sx={{ height: "max-content" }}>
@@ -194,7 +148,9 @@ function UserPanel() {
                 <Typography
                   sx={{ fontSize: 13, fontWeight: 200, color: "#fff" }}
                 >
-                  تعداد کل سفارشات خریداری شده: 55 مورد یافت شد.
+                  تعداد کل سفارشات خریداری شده:
+                  {dataBody?.length}
+                  مورد یافت شد.
                 </Typography>
               </Grid>
               <Grid container item xs={12}>
@@ -205,6 +161,10 @@ function UserPanel() {
                   dataBody={dataBody}
                   // show={(x) => console.log(dataBody.data[0])}
                   selectedItemId={selectedItemId}
+                  loading={loading}
+                  handleButtonData={handleButtonData}
+                  buttonData={buttonData}
+                  buttonLink={buttonLink}
                 />
               </Grid>
             </Grid>
