@@ -25,7 +25,8 @@ import {
 } from "../Icons/icon";
 import { useRouter } from "next/router";
 import { eraseCookie, getCookie } from "../../Cookie";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
+const Cookies = require("js-cookie");
 
 function Header() {
   const [headerItems, setHeaderItems] = useState([
@@ -58,6 +59,11 @@ function Header() {
   const logOut = () => {
     if (getCookie("token")) {
       Cookies.remove("token");
+      Cookies.remove("token", {
+        path: "",
+        domain: ".vixxa.ir",
+        secure: true,
+      });
     }
     router.push("/login");
   };

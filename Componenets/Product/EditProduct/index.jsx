@@ -27,7 +27,6 @@ function EditProduct({
   setOpenDialogImage,
   setCategoriesUpdate,
   categoriesUpdate,
-  
 }) {
   // const [openDialogImage, setOpenDialogImage] = useState(false);
 
@@ -36,13 +35,23 @@ function EditProduct({
       <DialogTitle>ویرایش محصول {editedProduct.name}</DialogTitle>
       <DialogContent>
         <Grid container spacing={2} my={1}>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={10}>
             <TextField
               fullWidth
               label="نّام محصول"
               name="name"
               value={editedProduct.name}
               onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <TextField
+              fullWidth
+              label="نام فایل"
+              name="idDownload"
+              value={editedProduct.idDownload}
+              onChange={handleChange}
+              required
             />
           </Grid>
           <Grid item xs={12} md={2}>

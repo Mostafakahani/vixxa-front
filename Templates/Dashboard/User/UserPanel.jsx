@@ -41,7 +41,7 @@ function UserPanel() {
               },
               {
                 type: "btn",
-                text: item?.id,
+                text: item?.download,
               },
             ],
           };
@@ -70,6 +70,10 @@ function UserPanel() {
         setLoading(false);
         setButtonLink(response.data);
         toast.success("Ready to Download");
+        window.open(
+          response.data.link,
+          "_blank" 
+        );
       } else {
         setLoading(false);
         toast.error(response.data.message);

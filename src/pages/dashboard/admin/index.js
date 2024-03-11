@@ -30,6 +30,7 @@ function AdminPage() {
     detail: "",
     imageUrl: "",
     image: "",
+    idDownload: "",
   });
 
   const getData = async () => {
@@ -80,6 +81,7 @@ function AdminPage() {
       imageUrl: product?.imageUrl,
       image: product?.image,
       category: product?.category,
+      idDownload: product?.idDownload,
     });
     setOpen(true);
   };
@@ -128,6 +130,7 @@ function AdminPage() {
           imageUrl: editedProduct?.imageUrl,
           image: editedProduct?.image,
           category: editedProduct?.category,
+          idDownload: editedProduct?.idDownload,
         },
         {
           withCredentials: true,

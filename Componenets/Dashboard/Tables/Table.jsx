@@ -104,7 +104,9 @@ export default function TableItems({
   setSelected = false,
   selected = false,
   handleButtonData,
-  loading,buttonData,buttonLink
+  loading,
+  buttonData,
+  buttonLink,
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -378,17 +380,10 @@ export default function TableItems({
                               {loading && (
                                 <CircularProgress sx={{ color: "#28D219" }} />
                               )}
-                              {!loading && (
-                                <>
-                                  {!buttonLink && "دریافت فایل"}
-                                  {buttonLink && "دانلود"}
-                                </>
-                              )}
+                              {!loading && <>دریافت فایل</>}
                             </Button>
                           </>
                         )}
-
-                        
                       </TableCell>
                     ))}
                   </TableRow>

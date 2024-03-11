@@ -32,6 +32,7 @@ function NewProduct({
     detail: "",
     category: "",
     image: "",
+    idDownload: "",
   });
 
   const [categories, setCategories] = useState([]);
@@ -65,6 +66,7 @@ function NewProduct({
           detail: productData?.detail,
           category: productData?.category,
           image: productData?.image,
+          idDownload: productData?.idDownload,
         },
         {
           withCredentials: true,
@@ -104,13 +106,23 @@ function NewProduct({
       <DialogTitle>افزودن محصول جدید</DialogTitle>
       <DialogContent>
         <Grid container spacing={2} my={1}>
-          <Grid item xs={12} md={12}>
+          <Grid item xs={12} md={10}>
             <TextField
               fullWidth
-              label="نام محصول"
+              label="نّام محصول"
               name="name"
               value={productData.name}
               onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <TextField
+              fullWidth
+              label="نام فایل"
+              name="idDownload"
+              value={productData.idDownload}
+              onChange={handleChange}
+              required
             />
           </Grid>
           <Grid item xs={12} md={2}>
