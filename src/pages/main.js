@@ -32,3 +32,9 @@ function Main() {
 }
 
 export default Main;
+export async function getStaticProps() {
+  return {
+    props: {}, // از اینجا پس props خالی ارسال می‌شود
+    revalidate: 60 * 60 * 24 * 2, // به معنای آن است که هر 60 ثانیه، این صفحه را کش می‌کند و اطمینان حاصل می‌شود که اطلاعات جدید ارسال می‌شود.
+  };
+}
