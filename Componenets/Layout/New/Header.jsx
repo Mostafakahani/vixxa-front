@@ -20,7 +20,7 @@ export default function HeaderMain() {
   };
   return (
     <>
-      <Grid container mb={10}>
+      <Grid container mb={10} sx={{ position: "relative", zIndex: 10000 }}>
         <Grid container item>
           <Grid
             container
@@ -185,6 +185,7 @@ export default function HeaderMain() {
         anchor="top"
         open={isDrawerOpen}
         onClose={handleDrawerClose}
+        sx={{ position: "relative", zIndex: 10001 }}
         PaperProps={{
           sx: {
             bgcolor: "#171b2c",

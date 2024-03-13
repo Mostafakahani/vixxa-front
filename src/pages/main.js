@@ -2,6 +2,7 @@ import React from "react";
 import HeaderMain from "../../Componenets/Layout/New/Header";
 import { Container, Grid } from "@mui/material";
 import MainPage from "../../Componenets/Layout/New/MainPage";
+import FooterMain from "../../Componenets/Layout/New/Footer";
 
 function Main() {
   return (
@@ -13,7 +14,7 @@ function Main() {
           //   background: "rgb(23,27,44)",
           background: "linear-gradient(500deg, #171b2c 100%, black 100%);",
 
-        //   height: "100vh",
+          //   height: "100vh",
           p: 2,
         }}
       >
@@ -23,6 +24,7 @@ function Main() {
         >
           <HeaderMain />
           <MainPage />
+          <FooterMain />
         </Grid>
       </Container>
     </>

@@ -1,26 +1,27 @@
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import React from "react";
+import MainItems from "../../../Templates/Landing/MainItems/MainItems";
 const prices = [
   {
     iconSrc: "/price-icon.svg",
     title: "قیمت",
     description:
       "ویکسا در ارزان ترین حالت ممکن، قالب های مورد نظر شما را ارایه میدهد.",
-    imageSrc: "/price-image-icon.png",
+    imageSrc: "/price-image-icon.svg",
   },
   {
-    iconSrc: "/price-icon.svg",
-    title: "قیمت",
+    iconSrc: "/privcy-icon.svg",
+    title: "حفظ حریم خصوصی",
     description:
-      "ویکسا در ارزان ترین حالت ممکن، قالب های مورد نظر شما را ارایه میدهد.",
-    imageSrc: "/price-image-icon.png",
+      "اولویت ویکـــسا امنیت شماست و برای حفظ حریم خصوصی قوانین دقیقی داره",
+    imageSrc: "/code-privcy-image.svg",
   },
   {
-    iconSrc: "/price-icon.svg",
-    title: "قیمت",
+    iconSrc: "/peyment-icon.svg",
+    title: "پرداخت",
     description:
-      "ویکسا در ارزان ترین حالت ممکن، قالب های مورد نظر شما را ارایه میدهد.",
-    imageSrc: "/price-image-icon.png",
+      "به سادگی از درگاه های ایرانی خرید خود را به ارزش رایج کشور می توانید انجام دهید.",
+    imageSrc: "/money-image.svg",
   },
 ];
 
@@ -190,66 +191,8 @@ function MainPage() {
             چرا از ویکــــسا خرید کنم؟
           </Typography>
         </Grid>
-        <Grid container item spacing={2}>
-          {prices.map((price, index) => (
-            <Grid container item xs={12}
-              sm={4}
-              key={index}
-              sx={{
-                bgcolor: "#00000017",
-                borderRadius: 4,
-                border: "1px solid #ffffff1f",
-                p: 3,
-              }}
-            >
-              <Grid container item xs={12}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Box component={"img"} src={price.iconSrc} />
-              </Grid>
-              <Grid container item xs={12}>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: "#fff",
-                    fontWeight: 500,
-                    fontSize: 24,
-                    width: "100%",
-                    textAlign: "center",
-                  }}
-                >
-                  {price.title}
-                </Typography>
-              </Grid>
-              <Grid container item xs={12}>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: "#7A8093",
-                    fontWeight: 300,
-                    fontSize: 13,
-                    width: "100%",
-                    textAlign: "center",
-                  }}
-                >
-                  {price.description}
-                </Typography>
-                <Box
-                  component={"img"}
-                  src={price.imageSrc}
-                  width={"100%"}
-                  sx={{ position: "relative", top: 24 }}
-                />
-              </Grid>
-            </Grid>
-          ))}
-        </Grid>
-        );
       </Grid>
+      <MainItems data={prices} />
     </Grid>
   );
 }
