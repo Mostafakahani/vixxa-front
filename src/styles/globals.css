@@ -27,6 +27,64 @@
     url(/fonts/ModamFaNumWeb-SemiBold.woff2) format("woff2");
 }
 
+
+
+
+
+
+
+/* Font faces for Persian text */
+@font-face {
+  font-family: "estedad";
+  font-weight: 200;
+  src:
+    url(/fonts/Estedad-Light.woff2) format("woff2");
+}
+@font-face {
+  font-family: "estedad";
+  font-weight: 100;
+  src:
+    url(/fonts/estedad-woff2/Estedad-Thin.woff2) format("woff2");
+}
+@font-face {
+  font-family: "estedad";
+  font-weight: 200;
+  src:
+    url(/fonts/estedad-woff2/Estedad-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "estedad";
+  font-weight: 400;
+  src:
+    url(/fonts/estedad-woff2/Estedad-Medium.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "estedad";
+  font-weight: 800;
+  src:
+    url(/fonts/estedad-woff2/Estedad-Black.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "estedad";
+  font-weight: 600;
+  src:
+    url(/fonts/estedad-woff2/Estedad-SemiBold.woff2) format("woff2");
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* Font faces for English text */
 @font-face {
   font-family: Gilroy;
@@ -82,9 +140,8 @@
   direction: rtl;
   user-select: none !important;
   text-decoration-line: none !important;
-  /* font-family: "modam"; */
+  font-family: "estedad" !important;
 }
-
 /* Apply font families */
 body {
   /* font-family: "modam", "Gilroy", sans-serif; */

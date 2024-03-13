@@ -6,10 +6,13 @@ import Footer from "./Footer";
 function Layout({ children }) {
   return (
     <>
-      <Header />
-      <Container maxWidth="md" sx={{ p: 2 }}>
+      {/* <Header /> */}
+      {/* <Container sx={{ p: 2 }}> */}
+        <div>
+
         {children}
-      </Container>
+        </div>
+        {/* </Container> */}
       <Footer />
     </>
   );
