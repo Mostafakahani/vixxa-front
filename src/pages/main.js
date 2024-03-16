@@ -7,7 +7,7 @@ import FooterMain from "../../Componenets/Layout/New/Footer";
 function Main() {
   return (
     <>
-      <Container
+      {/* <Container
         disableGutters
         maxWidth={false}
         sx={{
@@ -17,16 +17,16 @@ function Main() {
           //   height: "100vh",
           p: 2,
         }}
+      > */}
+      <Grid
+        container
+        sx={{ borderRadius: 4, border: "1px solid #ffffff1f", p: 3, mx: 1 }}
       >
-        <Grid
-          container
-          sx={{ borderRadius: 4, border: "1px solid #ffffff1f", p: 3, mx: 1 }}
-        >
-          <HeaderMain />
-          <MainPage />
-          <FooterMain />
-        </Grid>
-      </Container>
+        <HeaderMain />
+        <MainPage />
+        <FooterMain />
+      </Grid>
+      {/* </Container> */}
     </>
   );
 }

@@ -187,7 +187,7 @@ function MainPage() {
           sx={{
             borderRadius: 4,
             border: "1px solid #ffffff1f",
-            p: 2,
+            p: 3,
             pb: 3,
             // mx: ,
             bgcolor: "transparent",
@@ -239,15 +239,15 @@ function MainPage() {
                 display: "flex",
                 justifyContent: "center",
               }}
-              initial={{ opacity: 0 }}
+              // initial={{ opacity: 0 }}
               // animate={{ opacity: 1 }}
-              whileInView="visible"
-              viewport={{ once: false }}
-              transition={{ duration: 1 }}
-              variants={{
-                visible: { opacity: 1 },
-                hidden: { opacity: 0 },
-              }}
+              // whileInView="visible"
+              // viewport={{ once: false }}
+              // transition={{ duration: 1 }}
+              // variants={{
+              //   visible: { opacity: 1 },
+              //   hidden: { opacity: 0 },
+              // }}
             >
               <motion.div
                 style={{
@@ -257,13 +257,12 @@ function MainPage() {
                   overflow: "hidden",
                 }}
                 whileInView="visible"
-                viewport={{ once: false }}
                 initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 2 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
                 variants={{
-                  visible: { opacity: 1, y: 0 },
-                  hidden: { opacity: 0, scale: 0 },
+                  visible: { width: "100%" },
+                  hidden: { width: "0%" },
                 }}
               >
                 <Divider orientation="horizontal" />
@@ -300,20 +299,56 @@ function MainPage() {
       </Grid>
       <Grid container item>
         <Grid container item xs={12}>
-          <Typography
-            variant="h2"
-            sx={{
+          <motion.div
+            style={{
               width: "100%",
               maxWidth: "100%",
               textAlign: "center",
-              color: "#fff",
-              fontSize: { xs: 19, sm: 32, md: 52 },
-              fontWeight: 600,
-              my: 10,
             }}
+            initial={{ opacity: 0, y: 20 }} // Start from below
+            animate={{ opacity: 1, y: 0 }} // Move to top
+            transition={{
+              repeat: 1,
+              duration: 2,
+              // repeatType: "reverse",
+            }}
+            // initial="hidden" // Start from below
+            whileInView="visible"
+            viewport={{ once: false }}
+            // variants={{
+            //   visible: { opacity: 1, y: 50 },
+            //   hidden: { opacity: 0, y: 0 },
+            // }}
+
+            // initial={{ opacity: 0.5 }}
+            // animate={{
+
+            //   // Putting values into an array tells framer these are keyframes
+            //   opacity: [0.5, 0.8],
+
+            //   // Moved transition to be specific to the `animate` stage
+            //   transition: {
+            //     repeat: Infinity,
+            //     repeatType: "reverse",
+            //   },
+            // }}
+            // exit={{ opacity: 0, y: 50 }}
           >
-            چرا از ویکــــسا خرید کنم؟
-          </Typography>
+            <Typography
+              variant="h2"
+              sx={{
+                width: "100%",
+                maxWidth: "100%",
+                textAlign: "center",
+                color: "#fff",
+                fontSize: { xs: 20, sm: 32, md: 52 },
+                fontWeight: 600,
+                my: 10,
+              }}
+            >
+              چرا از ویکــــسا خرید کنم؟
+            </Typography>
+          </motion.div>
         </Grid>
       </Grid>
       <MainItems data={prices} />

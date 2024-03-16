@@ -9,6 +9,7 @@ import { token } from "stylis";
 import { useRouter } from "next/router";
 import { unstable_noStore as noStore } from "next/cache";
 import Cookies from "js-cookie";
+import AuthPage from "../../../Templates/Auth/AuthPage";
 
 function LoginPage() {
   noStore();
@@ -88,94 +89,22 @@ function LoginPage() {
   return (
     <>
       <Container
-        maxWidth="xs"
         sx={{
-          height: "84vh",
+          height: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
         }}
       >
-        <Grid
-          container
-          maxWidth={"xs"}
-          item
-          sx={{
-            bgcolor: "#031935",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            p: 2,
-            borderRadius: 4,
-          }}
-          rowSpacing={2}
-        >
-          <Grid item>
-            <Typography
-              variant="h5"
-              sx={{ fontWeight: "bold", color: "#dbdbdb" }}
-            >
-              ویکسا
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            container
-            sx={{ display: "flex", justifyContent: "flex-start" }}
-          >
-            <Typography
-              variant="span"
-              sx={{
-                fontWeight: "bold",
-                color: "#cfcfcf",
-                fontSize: { xs: "14px", sm: "1rem" },
-              }}
-            >
-              ورود
-            </Typography>
-          </Grid>
-          <Login
-            userData={userData}
-            setUserData={(e) => setUserData(e)}
-            handleLogin={handleLogin}
-            loading={loading}
-            setLoading={(e) => setLoading(e)}
-          />
-          <Grid
-            item
-            container
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Grid
-              item
-              container
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Typography
-                variant="body2"
-                sx={{ color: "#cfcfcf", fontSize: { xs: 12, sm: 13 } }}
-              >
-                حساب نداری؟
-              </Typography>
-              <Button
-                onClick={() => router.push("/register")}
-                sx={{ fontSize: { xs: 12, sm: 13 } }}
-              >
-                برای ساخت حساب کاربری کلیک کنید
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
+        <AuthPage
+          userData={userData}
+          setUserData={setUserData}
+          loading={loading}
+          setLoading={setLoading}
+          handleLogin={handleLogin}
+          isLogin={true}
+        />
       </Container>
     </>
   );

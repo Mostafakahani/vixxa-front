@@ -1,16 +1,43 @@
-import { Box, Button, Container, Divider, Drawer, Grid } from "@mui/material";
+import {
+  Badge,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Drawer,
+  Grid,
+  IconButton,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
+import { useAuth } from "@/pages/authContext";
+import { AccountCircle } from "@mui/icons-material";
+import { BasketIcon, UserIcon } from "../../Icons/icon";
 
 export default function HeaderMain() {
   const theme = useTheme();
   const router = useRouter();
+  const { isAuth, inBasket, setAuth } = useAuth();
 
   const matchDownMd = useMediaQuery(theme.breakpoints.up("xl"));
   const matchDownLg = useMediaQuery(theme.breakpoints.down("sm"));
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const menuItems = [
+    { label: "کامپوننت ها", url: "/components" },
+    { label: "تمپلیت ها", url: "/templates" },
+    { label: "ارتباط با ما", url: "/" },
+  ];
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
   };
@@ -162,19 +189,89 @@ export default function HeaderMain() {
               }}
             >
               <Grid item>
-                <Button
-                  variant="contained"
-                  disableElevation
-                  //   fullWidth
-                  sx={{
-                    borderRadius: 2,
-                    py: 1,
-                    px: 3,
-                    fontSize: { xs: 12, sm: 12 },
-                  }}
-                >
-                  ثبت نام
-                </Button>
+                {!isAuth ? (
+                  <Button
+                    variant="contained"
+                    disableElevation
+                    //   fullWidth
+                    sx={{
+                      borderRadius: 2,
+                      py: 1,
+                      px: 3,
+                      fontSize: { xs: 12, sm: 12 },
+                    }}
+                    onClick={() => router.push("/register")}
+                  >
+                    ثبت نام یا ورود
+                  </Button>
+                ) : (
+                  <>
+                    <div>
+                      <IconButton size="large">
+                        <Badge
+                          color="secondary"
+                          variant={inBasket ? "dot" : "standard"}
+                        >
+                          <BasketIcon sx={{ color: "#FFFFFF" }} />
+                        </Badge>
+                      </IconButton>
+                      <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                        color="inherit"
+                        // sx={{ border: "1px solid #1565C0" }}
+                      >
+                        <UserIcon />
+                        {/* <AccountCircle sx={{ color: "#1565C0" }} /> */}
+                      </IconButton>
+                      <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "center",
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "center",
+                        }}
+                        sx={{ zIndex: 200000 }}
+                        PaperProps={{
+                          sx: {
+                            bgcolor: "#04112166",
+                            color: "#fff",
+                            borderRadius: 3,
+                            p: 2,
+                            border: "1px solid #575A62",
+                            backdropFilter: "blur(30px)",
+                          },
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                      >
+                        <MenuItem
+                          dense
+                          onClick={() => router.push("/dashboard")}
+                        >
+                          داشبورد
+                        </MenuItem>
+                        <MenuItem
+                          dense
+                          onClick={() => router.push("/dashboard")}
+                        >
+                          سفارشات
+                        </MenuItem>
+                        <MenuItem dense onClick={() => setAuth(false)}>
+                          خروج
+                        </MenuItem>
+                      </Menu>
+                    </div>
+                  </>
+                )}
               </Grid>
             </Grid>
           </Grid>
@@ -209,69 +306,45 @@ export default function HeaderMain() {
             </Grid>
           </Grid>
         )}
+
         <Grid
           container
           sx={{
             width: "100%",
             display: "flex",
-            // flexDirection: "column",
             alignItems: "center",
             p: 2,
           }}
           role="presentation"
           onClick={handleDrawerClose}
         >
-          <Grid item>
-            <Button
-              variant="text"
-              size="small"
-              disableElevation
-              sx={{ borderRadius: 2, color: "#7A8093" }}
-            >
-              کامپوننت ها
-            </Button>
-          </Grid>
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{
-              borderColor: "#575A62",
-              borderRightWidth: 1,
-              textAlign: "center",
-              mx: 1,
-            }}
-          />
-
-          <Grid item>
-            <Button
-              variant="text"
-              size="small"
-              disableElevation
-              sx={{ borderRadius: 2, color: "#7A8093" }}
-            >
-              تمپلیت ها
-            </Button>
-          </Grid>
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{
-              borderColor: "#575A62",
-              borderRightWidth: 1,
-              textAlign: "center",
-              mx: 1,
-            }}
-          />
-          <Grid item>
-            <Button
-              variant="text"
-              size="small"
-              disableElevation
-              sx={{ borderRadius: 2, color: "#7A8093" }}
-            >
-              ارتباط با ما
-            </Button>
-          </Grid>
+          {menuItems.map((item, index) => (
+            <React.Fragment key={index}>
+              <Grid item>
+                <Button
+                  variant="text"
+                  size="small"
+                  disableElevation
+                  sx={{ borderRadius: 2, color: "#7A8093" }}
+                  href={item?.url}
+                >
+                  {item?.label}
+                </Button>
+              </Grid>
+              {index < menuItems.length - 1 && (
+                <Divider
+                  orientation="vertical"
+                  flexItem
+                  sx={{
+                    borderColor: "#575A62",
+                    borderRightWidth: 1,
+                    textAlign: "center",
+                    mx: 1,
+                  }}
+                />
+              )}
+            </React.Fragment>
+          ))}
         </Grid>
       </Drawer>
     </>

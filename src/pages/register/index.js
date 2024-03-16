@@ -82,7 +82,7 @@ function RegisterPage() {
       <Container
         maxWidth="xs"
         sx={{
-          height: "84vh",
+          height: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -94,7 +94,7 @@ function RegisterPage() {
           maxWidth={"xs"}
           item
           sx={{
-            bgcolor: "#031935",
+            bgcolor: "#202124",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

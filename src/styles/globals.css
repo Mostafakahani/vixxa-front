@@ -27,63 +27,40 @@
     url(/fonts/ModamFaNumWeb-SemiBold.woff2) format("woff2");
 }
 
-
-
-
-
-
-
 /* Font faces for Persian text */
 @font-face {
   font-family: "estedad";
   font-weight: 200;
-  src:
-    url(/fonts/Estedad-Light.woff2) format("woff2");
+  src: url(/fonts/Estedad-Light.woff2) format("woff2");
 }
 @font-face {
   font-family: "estedad";
   font-weight: 100;
-  src:
-    url(/fonts/estedad-woff2/Estedad-Thin.woff2) format("woff2");
+  src: url(/fonts/estedad-woff2/Estedad-Thin.woff2) format("woff2");
 }
 @font-face {
   font-family: "estedad";
   font-weight: 200;
-  src:
-    url(/fonts/estedad-woff2/Estedad-Regular.woff2) format("woff2");
+  src: url(/fonts/estedad-woff2/Estedad-Regular.woff2) format("woff2");
 }
 
 @font-face {
   font-family: "estedad";
   font-weight: 400;
-  src:
-    url(/fonts/estedad-woff2/Estedad-Medium.woff2) format("woff2");
+  src: url(/fonts/estedad-woff2/Estedad-Medium.woff2) format("woff2");
 }
 
 @font-face {
   font-family: "estedad";
   font-weight: 800;
-  src:
-    url(/fonts/estedad-woff2/Estedad-Black.woff2) format("woff2");
+  src: url(/fonts/estedad-woff2/Estedad-Black.woff2) format("woff2");
 }
 
 @font-face {
   font-family: "estedad";
   font-weight: 600;
-  src:
-    url(/fonts/estedad-woff2/Estedad-SemiBold.woff2) format("woff2");
+  src: url(/fonts/estedad-woff2/Estedad-SemiBold.woff2) format("woff2");
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* Font faces for English text */
 @font-face {
@@ -147,7 +124,7 @@ body {
   /* font-family: "modam", "Gilroy", sans-serif; */
   /* Default font for Persian text */
   /* font-family: "modam", "Gilroy", sans-serif; */
-  background-color: #041121 !important;
+  background: linear-gradient(500deg, #171b2c 100%, black 100%);
 }
 
 /* Select English text */
@@ -171,7 +148,7 @@ body {
 .ql-list,
 .ql-container,
 .ql-snow,
-.ql-editor>*,
+.ql-editor > *,
 .ql-blank,
 .ql-clipboard,
 .ql-tooltip,
@@ -228,8 +205,6 @@ li {
 .ql-color-info {
   color: #17a2b8;
 }
-
-
 
 /* width */
 .table-scroll::-webkit-scrollbar {
@@ -299,9 +274,6 @@ li {
   background: #031935 !important;
   color: #ffffff !important;
 }
-
-
-
 
 .title-section {
   color: #272727;

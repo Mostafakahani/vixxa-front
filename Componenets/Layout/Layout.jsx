@@ -8,11 +8,19 @@ function Layout({ children }) {
     <>
       {/* <Header /> */}
       {/* <Container sx={{ p: 2 }}> */}
-        <div>
+      <Container
+        disableGutters
+        maxWidth={false}
+        sx={{
+          //   background: "rgb(23,27,44)",
+          background: "linear-gradient(500deg, #171b2c 100%, black 100%);",
 
-        {children}
-        </div>
-        {/* </Container> */}
+          //   height: "100vh",
+          p: 2,
+        }}
+      >
+        <div>{children}</div>
+      </Container>
       {/* <Footer /> */}
     </>
   );

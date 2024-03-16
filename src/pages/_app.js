@@ -11,6 +11,7 @@ import Layout from "../../Componenets/Layout/Layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
+import { AuthProvider } from "./authContext";
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,11 +63,13 @@ export default function App({ Component, pageProps }) {
           <meta charset="utf-8" />
           <title>ویکسا | Vixxa</title>
         </Head>
-        <Layout>
-          <ToastContainer theme="dark" closeOnClick rtl />
-          <CssBaseline />
-          <Component {...pageProps} />
-        </Layout>
+        <AuthProvider>
+          <Layout>
+            <ToastContainer theme="dark" closeOnClick rtl />
+            <CssBaseline />
+            <Component {...pageProps} />
+          </Layout>
+        </AuthProvider>
       </RTL>
     </ThemeProvider>
   );

@@ -1,10 +1,11 @@
-export const UserIcon = ({ size = "23" }) => (
+export const UserIcon = ({ size = "23", color = "#ffffff" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
+    color={color}
     height={size}
     width={size}
   >
