@@ -5,6 +5,7 @@ import axios from "axios";
 import { Server } from "../../../config";
 import SkeletonComponent from "../../../Componenets/Loading/Skeleton";
 import { useRouter } from "next/router";
+import HeaderMain from "../../../Componenets/Layout/New/Header";
 
 function ShopPage({ data }) {
   const router = useRouter();
@@ -31,6 +32,7 @@ function ShopPage({ data }) {
 
   return (
     <>
+      {/* <HeaderMain /> */}
       {loading ? (
         <Grid item container display={"flex"} justifyContent={"center"}>
           <SkeletonComponent count={6} />

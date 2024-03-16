@@ -1,26 +1,27 @@
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import React from "react";
-import Header from "./Header";
 import Footer from "./Footer";
+import HeaderMain from "./New/Header";
+import FooterMain from "./New/Footer";
 
 function Layout({ children }) {
   return (
     <>
-      {/* <Header /> */}
+      {/* <HeaderMain /> */}
       {/* <Container sx={{ p: 2 }}> */}
-      <Container
-        disableGutters
-        maxWidth={false}
+      <Grid
+        container
         sx={{
-          //   background: "rgb(23,27,44)",
-          background: "linear-gradient(500deg, #171b2c 100%, black 100%);",
-
-          //   height: "100vh",
-          p: 2,
+          borderRadius: 4,
+          // border: "1px solid #ffffff1f",
+          p: 3,
         }}
       >
-        <div>{children}</div>
-      </Container>
+        {/* <HeaderMain /> */}
+        {children}
+        {/* <MainPage /> */}
+        {/* <FooterMain /> */}
+      </Grid>
       {/* <Footer /> */}
     </>
   );

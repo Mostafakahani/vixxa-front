@@ -45,6 +45,7 @@ function Login({ userData, setUserData, handleLogin, loading }) {
               textAlign: "center",
               backgroundColor: "#292b31",
               border: "1px solid #575A62",
+              color: "#fff",
               mt: 1,
             },
           }}
@@ -73,6 +74,7 @@ function Login({ userData, setUserData, handleLogin, loading }) {
               textAlign: "center",
               backgroundColor: "#292b31",
               border: "1px solid #575A62",
+              color: "#fff",
               mt: 1,
             },
           }}

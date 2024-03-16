@@ -5,8 +5,8 @@ import { getCookie } from "../../Cookie";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuth, setAuth] = useState(false); // Set initial value as needed
-  const [inBasket, setInBasket] = useState(false);
+  const [isAuth, setAuth] = useState(true); // Set initial value as needed
+  const [inBasket, setInBasket] = useState(true);
   const router = useRouter();
   useEffect(() => {
     if (getCookie("token")) {

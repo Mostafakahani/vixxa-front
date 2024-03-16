@@ -33,7 +33,7 @@ function Products({ items }) {
               sx={{
                 boxShadow: 0,
                 borderRadius: 3,
-                bgcolor: "#031935",
+                bgcolor: "#171b2c",
                 position: "relative",
                 height: "320px",
                 transition: "0.2s",
@@ -166,7 +166,7 @@ function Products({ items }) {
                     fullWidth
                     variant="contained"
                     sx={{
-                      backgroundColor: "#5C7CFF",
+                      backgroundColor: "#276EF6",
                       borderRadius: 3,
                       boxShadow: "0px 7px 20px -5px #4469ff",
                       fontSize: 13,
@@ -174,8 +174,8 @@ function Products({ items }) {
                       py: 1,
                       transition: "0.2s",
                       "&:hover": {
-                        backgroundColor: "#5c7cffde",
-                        boxShadow: "0px 7px 20px -5px #5c7cffde",
+                        backgroundColor: "#276EF6de",
+                        boxShadow: "0px 7px 20px -5px #276EF6de",
                         transform: "translateY(-5px)",
                       },
                     }}

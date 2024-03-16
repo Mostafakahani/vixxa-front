@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
   }, []);
   const theme = createTheme({
     typography: {
-      fontFamily: ["modam", "Gilroy"].join(","),
+      fontFamily: ["estedad", "Gilroy"].join(","),
     },
   });
   if (isLoading) {

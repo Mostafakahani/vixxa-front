@@ -50,7 +50,10 @@ function Register({ userData, setUserData, handleRegister, loading }) {
             sx: {
               borderRadius: 3,
               textAlign: "center",
-              backgroundColor: "#0B2648",
+              backgroundColor: "#292b31",
+              border: "1px solid #575A62",
+              color: "#fff",
+              mt: 1,
             },
           }}
           error={errors.fullName}
@@ -75,7 +78,10 @@ function Register({ userData, setUserData, handleRegister, loading }) {
             sx: {
               borderRadius: 3,
               textAlign: "center",
-              backgroundColor: "#0B2648",
+              backgroundColor: "#292b31",
+              border: "1px solid #575A62",
+              color: "#fff",
+              mt: 1,
             },
           }}
           error={errors.email}
@@ -102,7 +108,10 @@ function Register({ userData, setUserData, handleRegister, loading }) {
             sx: {
               borderRadius: 3,
               textAlign: "center",
-              backgroundColor: "#0B2648",
+              backgroundColor: "#292b31",
+              border: "1px solid #575A62",
+              color: "#fff",
+              mt: 1,
             },
           }}
           error={errors.password}
@@ -121,12 +130,12 @@ function Register({ userData, setUserData, handleRegister, loading }) {
           sx={{
             borderRadius: 3,
             p: 1,
-            backgroundColor: "#5C7CFF",
+            backgroundColor: "#276EF6",
             boxShadow: "0px 7px 20px -5px #4469ff",
             fontSize: 13,
             "&:hover": {
-              backgroundColor: "#5c7cffde",
-              boxShadow: "0px 7px 20px -5px #5c7cffde",
+              backgroundColor: "#276EF6de",
+              boxShadow: "0px 7px 20px -5px #276EF6de",
             },
           }}
           onClick={handleSubmit}
