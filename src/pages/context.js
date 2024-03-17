@@ -6,7 +6,7 @@ import { Server } from "../../config";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export default function AuthProvider({ children }) {
   const [basket, setBasket] = useState([]);
   const [isAuth, setAuth] = useState(false);
   const router = useRouter();
@@ -15,19 +15,20 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = getCookie("token");
       if (token) {
-        setAuth(true);
         const response = await axios.post(
           `${Server.URL}/basket/list`,
           {},
           { withCredentials: true }
         );
         setBasket(response.data.basket);
+        setAuth(true);
       } else {
+        setBasket([]);
         setAuth(false);
-        setBasket(false);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+      // Optionally, you can handle errors here, e.g., redirect to login page
     }
   };
 
@@ -42,6 +43,6 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export const useAuth = () => useContext(AuthContext);

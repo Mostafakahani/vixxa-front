@@ -11,7 +11,7 @@ import Layout from "../../Componenets/Layout/Layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
-import { AuthProvider } from "./context";
+import AuthProvider from "./context";
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(true);
