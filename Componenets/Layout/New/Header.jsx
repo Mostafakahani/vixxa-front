@@ -13,14 +13,16 @@ import {
 import React, { useState } from "react";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
-import { useAuth } from "@/pages/authContext";
+import { useAuth } from "@/pages/context";
 import { AccountCircle } from "@mui/icons-material";
 import { BasketIcon, UserIcon } from "../../Icons/icon";
+import Cookies from "js-cookie";
+import { getCookie } from "../../../Cookie";
 
 export default function HeaderMain() {
   const theme = useTheme();
   const router = useRouter();
-  const { isAuth, inBasket, setAuth } = useAuth();
+  const { isAuth, basket } = useAuth();
 
   const matchDownMd = useMediaQuery(theme.breakpoints.up("xl"));
   const matchDownLg = useMediaQuery(theme.breakpoints.down("sm"));
@@ -31,6 +33,17 @@ export default function HeaderMain() {
     { label: "تمپلیت ها", url: "/templates" },
     { label: "ارتباط با ما", url: "/" },
   ];
+  const logOut = () => {
+    if (getCookie("token")) {
+      Cookies.remove("token");
+      Cookies.remove("token", {
+        path: "",
+        domain: ".vixxa.ir",
+        secure: true,
+      });
+    }
+    router.push("/login");
+  };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -84,12 +97,13 @@ export default function HeaderMain() {
                 </Grid>
               )}
               {matchDownMd && (
-                <Grid item>
+                <Grid item onClick={() => router.push("/")}>
                   <Box
                     component={"img"}
                     src="/logo-main.svg"
                     width={130}
                     height={"auto"}
+                    sx={{ cursor: "pointer" }}
                   />
                 </Grid>
               )}
@@ -169,12 +183,13 @@ export default function HeaderMain() {
               )}
             </Grid>
             {!matchDownLg && !matchDownMd && (
-              <Grid item>
+              <Grid item onClick={() => router.push("/")}>
                 <Box
                   component={"img"}
                   src="/logo-main.svg"
                   width={130}
                   height={"auto"}
+                  sx={{ cursor: "pointer" }}
                 />
               </Grid>
             )}
@@ -207,10 +222,13 @@ export default function HeaderMain() {
                 ) : (
                   <>
                     <div>
-                      <IconButton size="large">
+                      <IconButton
+                        size="large"
+                        onClick={() => router.push("/cart")}
+                      >
                         <Badge
                           color="secondary"
-                          variant={inBasket ? "dot" : "standard"}
+                          variant={basket ? "dot" : "standard"}
                         >
                           <BasketIcon sx={{ color: "#FFFFFF" }} />
                         </Badge>
@@ -265,7 +283,7 @@ export default function HeaderMain() {
                         >
                           سفارشات
                         </MenuItem>
-                        <MenuItem dense onClick={() => setAuth(false)}>
+                        <MenuItem dense onClick={() => logOut()}>
                           خروج
                         </MenuItem>
                       </Menu>
@@ -290,7 +308,7 @@ export default function HeaderMain() {
         }}
       >
         {matchDownLg && !matchDownMd && (
-          <Grid item mt={2}>
+          <Grid item mt={2} onClick={() => router.push("/")}>
             <Grid
               item
               display={"flex"}
@@ -302,6 +320,7 @@ export default function HeaderMain() {
                 src="/logo-main.svg"
                 width={110}
                 height={"auto"}
+                sx={{ cursor: "pointer" }}
               />
             </Grid>
           </Grid>
@@ -326,7 +345,7 @@ export default function HeaderMain() {
                   size="small"
                   disableElevation
                   sx={{ borderRadius: 2, color: "#7A8093" }}
-                  href={item?.url}
+                  onClick={() => router.push(item?.url)}
                 >
                   {item?.label}
                 </Button>

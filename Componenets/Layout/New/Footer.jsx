@@ -1,33 +1,35 @@
 import { Box, Container, Divider, Grid, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 const footerOptions = [
   {
     title: "محصولات",
     subs: [
-      { name: "کامپوننت ها", url: "" },
-      { name: "تمپلیت ها", url: "" },
-      { name: "تحریم شکن", url: "" },
+      { name: "کامپوننت ها", url: "/components" },
+      { name: "تمپلیت ها", url: "/templates" },
+      // { name: "رفع محدودیت", url: "/vpn" },
     ],
   },
   {
     title: "ویکسا",
     subs: [
-      { name: "ارتباط با ما", url: "" },
-      { name: "درباره ما", url: "" },
-      { name: "وبلاگ", url: "" },
+      { name: "ارتباط با ما", url: "/" },
+      { name: "درباره ما", url: "/" },
+      { name: "وبلاگ", url: "/" },
     ],
   },
   {
     title: "شبکه های اجتماعی",
     subs: [
-      { name: "توییتر", url: "" },
-      { name: "گیت ها", url: "" },
-      { name: "اینستاگرام", url: "" },
+      { name: "توییتر", url: "/" },
+      { name: "گیت ها", url: "/" },
+      { name: "اینستاگرام", url: "/" },
     ],
   },
 ];
 function FooterMain() {
+  const router = useRouter();
   return (
     <Container
       disableGutters
@@ -128,13 +130,35 @@ function FooterMain() {
             <Box
               component={"img"}
               src="/zp-1.svg"
-              sx={{ width: { xs: "60px", sm: "70px" } }}
+              sx={{ width: { xs: "60px", sm: "70px" }, cursor: "pointer" }}
+              onClick={() =>
+                window.open(
+                  "https://www.zarinpal.com/trustPage/vixxa.ir",
+                  "_blank"
+                )
+              }
             />
-            <Box
-              component={"img"}
-              src="/e-namad.svg"
-              sx={{ width: { xs: "100px", sm: "110px" } }}
-            />
+            <Grid
+              container
+              item
+              justifyContent="center"
+              alignItems="center"
+              xs={2}
+            >
+              <a
+                referrerPolicy="origin"
+                target="_blank"
+                href="https://trustseal.enamad.ir/?id=459381&Code=a0WmTJGMv4OXj2kc7EhFe35pjxySWEuh"
+              >
+                <img
+                  referrerPolicy="origin"
+                  src="https://trustseal.enamad.ir/logo.aspx?id=459381&Code=a0WmTJGMv4OXj2kc7EhFe35pjxySWEuh"
+                  alt=""
+                  style={{ cursor: "pointer" }}
+                  code="a0WmTJGMv4OXj2kc7EhFe35pjxySWEuh"
+                />
+              </a>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

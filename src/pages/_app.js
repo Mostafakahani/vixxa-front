@@ -11,7 +11,7 @@ import Layout from "../../Componenets/Layout/Layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
-import { AuthProvider } from "./authContext";
+import { AuthProvider } from "./context";
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -65,7 +65,12 @@ export default function App({ Component, pageProps }) {
         </Head>
         <AuthProvider>
           <Layout>
-            <ToastContainer theme="dark" closeOnClick rtl />
+            <ToastContainer
+              theme="dark"
+              closeOnClick
+              rtl
+              style={{ zIndex: 1000000000000 }}
+            />
             <CssBaseline />
             <Component {...pageProps} />
           </Layout>

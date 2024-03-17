@@ -23,7 +23,7 @@ function Components() {
             src="/icon/Dots.svg"
             sx={{ height: "auto", width: "25px", mr: 1 }}
           />
-          <h1 style={{ color: "#4b4c4c" }}>لیست Components</h1>
+          <h1 style={{ color: "#4b4c4c" }}>لیست کاپوننت ها</h1>
         </Grid>
         <ComponentsPage />
       </Container>

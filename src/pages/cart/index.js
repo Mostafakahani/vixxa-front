@@ -5,8 +5,12 @@ import axios from "axios";
 import { Server } from "../../../config";
 import ProductsInBasket from "../../../Componenets/Shop/productsInBasket/ProductsInBasket";
 import { toast } from "react-toastify";
+import HeaderMain from "../../../Componenets/Layout/New/Header";
+import { useAuth } from "../context";
 
 function CartPage() {
+  const { refreshAuthAndBasket } = useAuth();
+
   const [basket, setBasket] = useState([]);
 
   const peymentGatway = async () => {
@@ -68,6 +72,7 @@ function CartPage() {
         }
       );
       fetchBasket();
+      refreshAuthAndBasket();
     } catch (error) {
       console.error("Error removing from basket:", error);
     }
@@ -77,48 +82,66 @@ function CartPage() {
     fetchBasket();
   }, []);
   return (
-    <Grid container rowSpacing={2}>
-      <Grid container item xs={12}>
-        <ProductsInBasket items={basket} removeFromBasket={removeFromBasket} />
-      </Grid>
-      <Grid container item display={"flex"} justifyContent={"flex-end"} xs={12}>
-        {basket?.length !== 0 && (
-          <Grid
-            container
-            item
-            display={"flex"}
-            justifyContent={"flex-end"}
-            xs={12}
-            sm={4}
-            md={2}
-          >
-            <Button
-              variant="contained"
-              disableElevation
-              fullWidth
-              sx={{
-                backgroundColor: "#5C7CFF",
-                borderRadius: 3,
-                //   boxShadow: "0px 7px 20px -5px #4469ff",
-                fontSize: 13,
-                px: 2,
-                py: 1,
-                transition: "0.2s",
-                "&:hover": {
-                  backgroundColor: "#5c7cffde",
-                  // boxShadow: "0px 7px 20px -5px #5c7cffde",
-                  transform: "translateY(-5px)",
-                },
-              }}
-              onClick={() => peymentGatway()}
+    <>
+      <HeaderMain />
+      <Grid container rowSpacing={2}>
+        <Grid container item xs={12}>
+          <ProductsInBasket
+            items={basket}
+            removeFromBasket={removeFromBasket}
+          />
+        </Grid>
+        <Grid
+          container
+          item
+          display={"flex"}
+          justifyContent={"flex-end"}
+          xs={12}
+        >
+          {basket?.length !== 0 && (
+            <Grid
+              container
+              item
+              display={"flex"}
+              justifyContent={"flex-end"}
+              xs={12}
+              sm={4}
+              md={2}
             >
-              پرداخت
-            </Button>
-          </Grid>
-        )}
+              <Button
+                variant="contained"
+                disableElevation
+                fullWidth
+                sx={{
+                  backgroundColor: "#276EF6",
+                  borderRadius: 3,
+                  //   boxShadow: "0px 7px 20px -5px #4469ff",
+                  fontSize: 13,
+                  px: 2,
+                  py: 1,
+                  transition: "0.2s",
+                  "&:hover": {
+                    backgroundColor: "#4469ff",
+                    boxShadow: "0px 7px 20px -5px #276EF6",
+                    transform: "translateY(-5px)",
+                  },
+                }}
+                onClick={() => peymentGatway()}
+              >
+                پرداخت
+              </Button>
+            </Grid>
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }
 
 export default CartPage;
+export async function getStaticProps() {
+  return {
+    props: {}, // از اینجا پس props خالی ارسال می‌شود
+    revalidate: 60 * 60 * 24 * 2, // به معنای آن است که هر دو روز، این صفحه را کش می‌کند و اطمینان حاصل می‌شود که اطلاعات جدید ارسال می‌شود.
+  };
+}

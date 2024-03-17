@@ -1,10 +1,15 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { CardIcon } from "../../../Componenets/Icons/icon";
 import { addToBasket } from "../../../utils/addToBasket";
+import HeaderMain from "../../../Componenets/Layout/New/Header";
+import { useAuth } from "@/pages/context";
 
 function DetailsItemPage({ data }) {
+  const { refreshAuthAndBasket } = useAuth();
+
   return (
     <>
+      <HeaderMain />
       <Container disableGutters>
         <Grid container mt={5}>
           <Grid
@@ -42,7 +47,10 @@ function DetailsItemPage({ data }) {
                     disableElevation
                     fullWidth
                     variant="contained"
-                    onClick={() => addToBasket(data?.product._id)}
+                    onClick={() => {
+                      addToBasket(data?.product._id);
+                      refreshAuthAndBasket();
+                    }}
                     sx={{
                       backgroundColor: "#5C7CFF",
                       borderRadius: 3,
@@ -56,7 +64,7 @@ function DetailsItemPage({ data }) {
                       },
                     }}
                   >
-                    دریافت محصول
+                    افزودن به سبد حرید
                   </Button>
                 </Grid>
                 <Grid
@@ -95,7 +103,13 @@ function DetailsItemPage({ data }) {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container item display={"flex"} justifyContent={"center"} my={5}>
+          <Grid
+            container
+            item
+            display={"flex"}
+            justifyContent={"center"}
+            my={5}
+          >
             <Grid
               container
               item
@@ -118,3 +132,10 @@ function DetailsItemPage({ data }) {
 }
 
 export default DetailsItemPage;
+
+export async function getStaticProps() {
+  return {
+    props: {}, // از اینجا پس props خالی ارسال می‌شود
+    revalidate: 60 * 60 * 24 * 2, // به معنای آن است که هر دو روز، این صفحه را کش می‌کند و اطمینان حاصل می‌شود که اطلاعات جدید ارسال می‌شود.
+  };
+}

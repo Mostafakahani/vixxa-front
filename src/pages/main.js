@@ -20,11 +20,11 @@ function Main() {
       > */}
       <Grid
         container
-        sx={{ borderRadius: 4, border: "1px solid #ffffff1f", p: 3, mx: 1 }}
+        // sx={{ borderRadius: 4, border: "1px solid #ffffff1f", p: 3, mx: 1 }}
       >
         <HeaderMain />
         <MainPage />
-        <FooterMain />
+        {/* <FooterMain /> */}
       </Grid>
       {/* </Container> */}
     </>

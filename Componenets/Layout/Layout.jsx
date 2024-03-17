@@ -12,15 +12,24 @@ function Layout({ children }) {
       <Grid
         container
         sx={{
-          borderRadius: 4,
+          // borderRadius: 4,
           // border: "1px solid #ffffff1f",
           p: 3,
         }}
       >
-        {/* <HeaderMain /> */}
-        {children}
-        {/* <MainPage /> */}
-        {/* <FooterMain /> */}
+        <Grid
+          container
+          sx={{
+            borderRadius: 4,
+            border: "1px solid #ffffff1f",
+            p: 3,
+          }}
+        >
+          {/* <HeaderMain /> */}
+          {children}
+          {/* <MainPage /> */}
+          <FooterMain />
+        </Grid>
       </Grid>
       {/* <Footer /> */}
     </>

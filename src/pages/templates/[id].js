@@ -4,6 +4,7 @@ import { Server } from "../../../config";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 function TemplatesPageDetail() {
   const router = useRouter();
@@ -38,7 +39,11 @@ function TemplatesPageDetail() {
   };
 
   if (loading) {
-    return <div>در حاله بارگذاری...</div>;
+    return (
+      <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (!data) {

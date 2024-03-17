@@ -36,6 +36,9 @@ function Products({ items }) {
                 bgcolor: "#171b2c",
                 position: "relative",
                 height: "320px",
+                // width: "150px",
+                minWidth: "250px",
+                maxWidth: "350px",
                 transition: "0.2s",
                 "&:hover": {
                   transition: "0.2s",

@@ -4,12 +4,13 @@ import { Server } from "../../../config";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 function TemplatesPageDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (id) {
@@ -33,12 +34,16 @@ function TemplatesPageDetail() {
       console.error("An error occurred: ", error);
       toast.error("An error occurred");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   if (loading) {
-    return <div>در حاله بارگذاری...</div>;
+    return (
+      <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (!data) {

@@ -4,6 +4,9 @@ import Table from "../../../Componenets/Dashboard/Tables/Table";
 import axios from "axios";
 import { Server } from "../../../config";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { getCookie } from "../../../Cookie";
+import { useRouter } from "next/router";
 
 function UserPanel() {
   const [selected, setSelected] = useState([]);
@@ -12,8 +15,19 @@ function UserPanel() {
   const [loading, setLoading] = useState(dataBody.length > 0);
   const [buttonData, setButtonData] = useState(null);
   const [buttonLink, setButtonLink] = useState(null);
+  const router = useRouter();
   const dataHead = ["نام محصول", "مبلغ", "دسته بندی", "دریافت محصول"];
-
+  const logOut = () => {
+    if (getCookie("token")) {
+      Cookies.remove("token");
+      Cookies.remove("token", {
+        path: "",
+        domain: ".vixxa.ir",
+        secure: true,
+      });
+    }
+    router.push("/login");
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -70,10 +84,7 @@ function UserPanel() {
         setLoading(false);
         setButtonLink(response.data);
         toast.success("Ready to Download");
-        window.open(
-          response.data.link,
-          "_blank" 
-        );
+        window.open(response.data.link, "_blank");
       } else {
         setLoading(false);
         toast.error(response.data.message);
@@ -87,76 +98,82 @@ function UserPanel() {
   };
   return (
     <>
-      <Grid container item rowSpacing={3} sx={{ height: "max-content" }}>
+      <Grid container item rowSpacing={5} sx={{ height: "max-content" }}>
         <Grid container item>
-          <Grid container item>
-            <Grid
-              item
-              xs={6}
-              sm={4}
-              sx={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-            >
-              <Button>مشاهده سفارشات</Button>
+          <Container maxWidth="md">
+            <Grid container item>
+              <Grid
+                item
+                xs={6}
+                sm={4}
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <Button>مشاهده سفارشات</Button>
+              </Grid>
+              <Grid
+                item
+                sm={4}
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h5" sx={{ color: "#fff" }}>
+                  لیست سفارشات
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={6}
+                sm={4}
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                }}
+              >
+                <Button color="error" onClick={logOut}>
+                  خروج از حساب
+                </Button>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  display: { xs: "flex", sm: "none" },
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h5" sx={{ color: "#fff" }}>
+                  لیست سفارشات
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid
-              item
-              sm={4}
-              sx={{
-                display: { xs: "none", sm: "flex" },
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Typography variant="h5" sx={{ color: "#fff" }}>
-                لیست سفارشات
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={6}
-              sm={4}
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              <Button color="error">خروج از حساب</Button>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: { xs: "flex", sm: "none" },
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Typography variant="h5" sx={{ color: "#fff" }}>
-                لیست سفارشات
-              </Typography>
-            </Grid>
-          </Grid>
+          </Container>
         </Grid>
         <Grid container item>
           <Container
             maxWidth="md"
-            sx={{ bgcolor: "#031935", borderRadius: 3, p: 2 }}
+            sx={{ bgcolor: "#202124", borderRadius: 3, p: 2 }}
           >
-            <Grid container rowSpacing={1}>
+            <Grid container rowSpacing={3}>
               <Grid container item xs={12}>
                 <Typography
                   sx={{ fontSize: 13, fontWeight: 200, color: "#fff" }}
                 >
-                  تعداد کل سفارشات خریداری شده:
-                  {dataBody?.length}
-                  مورد یافت شد.
+                  {dataBody?.length > 0
+                    ? `تعداد کل سفارشات خریداری شده: ${dataBody.length} مورد یافت شد.`
+                    : "هیچ سفارشی ثبت نشده است."}
+                  <br />
                 </Typography>
               </Grid>
+
               <Grid container item xs={12}>
                 <Table
                   selected={selected}
