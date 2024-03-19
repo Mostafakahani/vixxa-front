@@ -143,7 +143,8 @@ function FooterMain() {
               item
               justifyContent="center"
               alignItems="center"
-              xs={2}
+              xs={12}
+              sm={2}
             >
               <a
                 referrerPolicy="origin"
@@ -154,7 +155,11 @@ function FooterMain() {
                   referrerPolicy="origin"
                   src="https://trustseal.enamad.ir/logo.aspx?id=459381&Code=a0WmTJGMv4OXj2kc7EhFe35pjxySWEuh"
                   alt=""
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    width: "70px",
+                    height: "auto",
+                  }}
                   code="a0WmTJGMv4OXj2kc7EhFe35pjxySWEuh"
                 />
               </a>
